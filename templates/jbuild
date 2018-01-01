@@ -1,0 +1,10 @@
+(jbuild_version 1)
+
+(install
+ ((section share)
+  (files
+   ((lib/%NAME%.opam.template   as templates/lib/%NAME%.opam.template)
+    (lib/src/%NAME%.ml.template as templates/lib/src/%NAME%.ml.template)
+    (lib/src/jbuild.template    as templates/lib/src/jbuild.template)
+    (lib/test/jbuild.template   as templates/lib/test/jbuild.template)
+    (lib/test/tests.ml.template as templates/lib/test/tests.ml.template)))))

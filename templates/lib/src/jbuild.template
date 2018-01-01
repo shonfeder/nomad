@@ -1,0 +1,8 @@
+(jbuild_version 1)
+
+(library
+ ((name         %%NAME%%)
+  (public_name  %%NAME%%)
+  (synopsis     "Description of library %%NAME%%")
+  (libraries    (core))
+  (preprocess   (pps (ppx_deriving.std)))))

@@ -1,0 +1,8 @@
+(jbuild_version 1)
+
+(library
+ ((name        nomad)
+  (public_name nomad)
+  (libraries  (core
+               fileutils))
+  (preprocess (pps (ppx_deriving.show)))))

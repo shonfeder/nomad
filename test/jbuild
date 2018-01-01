@@ -1,0 +1,14 @@
+(jbuild_version 1)
+
+(executable
+ ((name         tests)
+  (public_name  tests)
+  (libraries    (core
+                 qcheck
+                 nomad))))
+
+(alias
+ ((name runtest)
+  (deps (tests.exe))
+  (action (run ${<}))))
+
