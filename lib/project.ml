@@ -15,6 +15,8 @@ type kind =
   | Library
 [@@deriving show]
 
+let name_regexp = Str.regexp "%%NAME%%"
+
 (* - dir name
     - file name.opam
     - dir bin|lib:
@@ -101,6 +103,11 @@ let copy_template_to_dir
   = fun ~template target ->
     let contents = FileUtil.ls template in
     Ok (FileUtil.cp ~recurse:true contents target)
+
+let substitute_name_in_template_string
+  : name:string -> string -> string
+  = fun ~name string ->
+    Str.global_replace name_regexp name string
 
 let make_project_from_template
   : ?location:string -> string -> string -> unit result
