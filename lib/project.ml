@@ -15,7 +15,7 @@ type kind =
   | Library
 [@@deriving show]
 
-let name_regexp = Str.regexp "%%NAME%%"
+let name_regexp = Str.regexp_string "%%NAME%%"
 
 (* - dir name
     - file name.opam
@@ -87,6 +87,15 @@ let new_project
     | Executable -> new_executable
     | Library    -> new_library
 
+let substitute_name_in_template_string
+  : name:string -> string -> string
+  = fun ~name string ->
+    Str.global_replace name_regexp name string
+
+(** [make_project_dir name] is the the absolute path path to the directory
+    created for project [name] project directory. Unless a [~location] is
+    specified, the project directory is created in the current working
+    directory. *)
 let make_project_dir
   : ?location:string -> string -> string result
   = fun ?location name ->
