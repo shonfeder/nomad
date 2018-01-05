@@ -5,7 +5,8 @@
   (public_name  tests)
   (libraries    (core
                  qcheck
-                 nomad))))
+                 nomad))
+  (preprocess (pps (ppx_deriving.show)))))
 
 (alias
  ((name runtest)

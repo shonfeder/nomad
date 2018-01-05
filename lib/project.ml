@@ -108,19 +108,25 @@ let make_project_dir
       Error (Directory_exists base_dir)
 
 let copy_template_to_dir
-  : template:string -> string -> unit result
+  : template:string -> string -> string result
   = fun ~template target ->
     let contents = FileUtil.ls template in
-    Ok (FileUtil.cp ~recurse:true contents target)
+    let () = FileUtil.cp ~recurse:true contents target in
+    Ok target
 
-let substitute_name_in_template_string
-  : name:string -> string -> string
-  = fun ~name string ->
-    Str.global_replace name_regexp name string
+let rename_template_files
+  : name:string -> string -> unit
+  = fun ~name projet_dir ->
+    let template_base_names = Aux.dir_contents projet_dir in
+    let base_names =
+      List.map ~f:(substitute_name_in_template_string ~name) template_base_names
+    in
+    ignore @@ List.map2 template_base_names base_names ~f:FileUtil.mv
 
 let make_project_from_template
   : ?location:string -> string -> string -> unit result
   = fun ?location name template ->
     let open Result.Monad_infix
     in make_project_dir ?location name >>=
-    copy_template_to_dir ~template
+    copy_template_to_dir ~template >>|
+    rename_template_files ~name

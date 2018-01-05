@@ -51,7 +51,24 @@ let tests =
           num_after_substitution - num_existing_ocurrances in
         num_expected_substiutions = num_name_instaces ||
         (Printf.printf "failed on %s" substituted; false)
-      end
+      end;
+
+    Test.make
+      ~name:"dir_contents lists file contents recursively"
+      ~count:1
+      unit
+      begin fun () ->
+        let files = Aux.dir_contents @@ Filename.concat template_dir "lib" in
+        (*XXX*)
+        files = ["/Users/sf/Dropbox/Programming/ocaml/nomad/_build/default/templates/lib/%%NAME%%.opam";
+                "/Users/sf/Dropbox/Programming/ocaml/nomad/_build/default/templates/lib/src/%%NAME%%.ml";
+                "/Users/sf/Dropbox/Programming/ocaml/nomad/_build/default/templates/lib/src/jbuild";
+                "/Users/sf/Dropbox/Programming/ocaml/nomad/_build/default/templates/lib/test/jbuild";
+                "/Users/sf/Dropbox/Programming/ocaml/nomad/_build/default/templates/lib/test/tests.ml"
+               ]
+        (* print_endline ([%derive.show: string list] files);
+         * true *)
+      end;
 
   ]
 
