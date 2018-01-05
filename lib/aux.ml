@@ -1,5 +1,7 @@
 (** Auxiliary functions *)
 
+open Core
+
 (** [count_matches pattern string] is the number of times [pattern] appears
     in [string] (non-overlapping count).
 
@@ -19,3 +21,18 @@ let count_matches
           with Not_found -> acc
         in
         count 0 0
+
+(** [dir_contents file] is a list of all the non-directory files
+    contained in [file]. If [file] is a directory, it will recursively
+    list the files in [file] and its children directories. If [file] is a
+    non-directory (which includes files which may be directories but)
+    cannot be identified as such) [dir_contents file] is just [[file]]. *)
+let rec dir_contents
+  : string -> string list
+  = fun file ->
+    match Sys.is_directory file with
+    | `No | `Unknown -> [file]
+    | `Yes           ->
+      match FileUtil.ls file with
+      | []    -> []
+      | f::fs -> dir_contents f @ List.concat_map ~f:dir_contents fs
