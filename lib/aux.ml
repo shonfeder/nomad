@@ -1,5 +1,9 @@
 (** Auxiliary functions *)
 
+(** [count_matches pattern string] is the number of times [pattern] appears
+    in [string] (non-overlapping count).
+
+    XXX StackOverlow if given [""] for the pattern *)
 let count_matches
     : string -> string -> int
     = fun pattern string ->
