@@ -10,25 +10,20 @@ let () = Project.template_dir := template_dir
 let tests =
   [
 
-    (* Test.make
-     * TODO how to mock?
-     *   ~name:"copy template test"
-     *   ~count:1
-     *   unit
-     *   begin
-     *     fun () ->
-     *       Result.is_ok @@
-     *       Project.make_project_from_template
-     *         ~location:"/Users/sf/Dropbox/Programming/ocaml/nomad"
-     *         "project-test"
-     *         "/Users/sf/Dropbox/Programming/ocaml/nomad/templates/lib"
-     *   end; *)
-
     Test.make
-      ~name:"substitue_name_in_template_string replaces any instance of %%NAME%%"
-      (* ~count:1 *)
-      (small_list (oneof [printable_string; always "%%NAME%%"]))
-      begin fun string_parts ->
+      (* TODO how to mock? *)
+      ~name:"make new project"
+      ~count:1
+      unit
+      begin
+        fun () ->
+          Result.is_ok @@
+          Project.make_project_from_template
+            ~location:"/Users/sf/Dropbox/Programming/ocaml/nomad"
+            ~template:"/Users/sf/Dropbox/Programming/ocaml/nomad/templates/lib"
+            "project-test"
+      end;
+
     Test.make
       ~name:"substitute_name_in_template_string replaces any instance of %%NAME%%"
       (pair small_string (small_list (oneof [printable_string; always "%%NAME%%"])))
