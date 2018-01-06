@@ -94,6 +94,19 @@ let substitute_name_in_template_string
   = fun ~name string ->
     Str.global_replace name_regexp name string
 
+let substitute_name_in_template_file
+  : name:string -> string -> unit result
+  = fun ~name file_name ->
+    try
+      let data =
+        file_name
+        |> In_channel.read_all
+        |> substitute_name_in_template_string ~name
+      in
+      Ok (Out_channel.write_all file_name ~data)
+    with
+    | Sys_error err -> Error (File_not_found err)
+
 (** [make_project_dir name] is the the absolute path path to the directory
     created for project [name] project directory. Unless a [~location] is
     specified, the project directory is created in the current working
@@ -136,10 +149,17 @@ let rename_template_files
     | FileUtil.RmError err -> Error (File_exists err)
     | FileUtil.MvError err -> Error (File_not_found err)
 
+let substitute_name_in_template_files
+  : name:string -> string list -> unit result
+  = fun ~name project_file_names ->
+    let f = substitute_name_in_template_file ~name in
+    List.map ~f project_file_names |> Result.all_ignore
+
 let make_project_from_template
-  : ?location:string -> string -> string -> unit result
-  = fun ?location name template ->
-    let open Result.Monad_infix
-    in make_project_dir ?location name >>=
-    copy_template_to_dir ~template >>|
-    rename_template_files ~name
+  : ?location:string -> template:string -> string -> unit result
+  = fun ?location ~template name ->
+    let open Result.Monad_infix in
+    make_project_dir ?location name
+    >>= copy_template_to_dir ~template
+    >>= rename_template_files ~name
+    >>= substitute_name_in_template_files ~name
