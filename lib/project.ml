@@ -7,6 +7,8 @@ let template_dir : string ref = ref ""
 
 type failure_reason =
   | Directory_exists of string
+  | File_not_found of string
+  | File_exists of string
 
 type 'a result = ('a, failure_reason) Result.t
 
@@ -109,19 +111,30 @@ let make_project_dir
 
 let copy_template_to_dir
   : template:string -> string -> string result
-  = fun ~template target ->
-    let contents = FileUtil.ls template in
-    let () = FileUtil.cp ~recurse:true contents target in
-    Ok target
+  = fun ~template project_dir ->
+    try
+      let contents = FileUtil.ls template in
+      let () = FileUtil.cp ~recurse:true contents project_dir in
+      Ok project_dir
+    with
+    | Sys_error err -> Error (File_not_found err)
 
 let rename_template_files
-  : name:string -> string -> unit
-  = fun ~name projet_dir ->
-    let template_base_names = Aux.dir_contents projet_dir in
-    let base_names =
-      List.map ~f:(substitute_name_in_template_string ~name) template_base_names
+  : name:string -> string -> string list result
+  = fun ~name project_dir ->
+    let template_file_names =
+      Aux.dir_contents project_dir
     in
-    ignore @@ List.map2 template_base_names base_names ~f:FileUtil.mv
+    let project_file_names =
+      let f = substitute_name_in_template_string ~name in
+      List.map ~f template_file_names
+    in
+    try
+      ignore @@ List.map2 ~f:FileUtil.mv template_file_names project_file_names;
+      Ok project_file_names
+    with
+    | FileUtil.RmError err -> Error (File_exists err)
+    | FileUtil.MvError err -> Error (File_not_found err)
 
 let make_project_from_template
   : ?location:string -> string -> string -> unit result
