@@ -3,12 +3,17 @@ open Core
 (* TODO use templates *)
 
 (** Location of the template directory *)
-let template_dir : string ref = ref ""
+
+let package_name = "nomad"
+let template_dir =
+  let share_dir = Aux.package_share_dir package_name in
+  Filename.concat share_dir "templates"
 
 type failure_reason =
   | Directory_exists of string
   | File_not_found of string
   | File_exists of string
+[@@deriving show]
 
 type 'a result = ('a, failure_reason) Result.t
 
@@ -16,6 +21,9 @@ type kind =
   | Executable
   | Library
 [@@deriving show]
+
+exception Nomad of string
+exception Not_implemented
 
 let name_regexp = Str.regexp_string "%%NAME%%"
 
@@ -93,3 +101,17 @@ let make_project_from_template
     >>= copy_template_to_dir ~template
     >>= rename_template_files ~name
     >>= substitute_name_in_template_files ~name
+
+(* TODO Custom template paths *)
+let new_project
+  : kind -> string -> unit
+  = fun kind name ->
+    let template = match kind with
+      | Executable -> raise Not_implemented
+      | Library    -> Filename.concat template_dir "lib"
+    in
+    (* TODO Return nice error output, not just crash *)
+    match make_project_from_template ~template name with
+    | Ok () -> ()
+    | Error err -> raise (Nomad (show_failure_reason err))
+

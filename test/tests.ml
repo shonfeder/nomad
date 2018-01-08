@@ -5,7 +5,6 @@ open Nomad
 let () = Unix.chdir "../bin"
 let () = print_endline @@ Unix.getcwd ()
 let template_dir = Filename.realpath "../templates"
-let () = Project.template_dir := template_dir
 
 let tests =
   [
