@@ -36,3 +36,12 @@ let rec dir_contents
       match FileUtil.ls file with
       | []    -> []
       | f::fs -> dir_contents f @ List.concat_map ~f:dir_contents fs
+
+(*TODO Should this use this approach?
+  print_endline (FileUtil.which (Sys.argv.(0)) ^ "/../.." |> Filename.realpath);
+  It'd cut down on dependencies *)
+let package_share_dir package_name =
+  let module F = Filename in
+  let pkg_dir = Findlib.default_location () in
+  F.of_parts [pkg_dir; "..";  "share"; package_name]
+  |> F.realpath

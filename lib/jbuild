@@ -4,6 +4,7 @@
  ((name        nomad)
   (public_name nomad)
   (libraries  (core
+               findlib
                fileutils
                str))
   (preprocess (pps (ppx_deriving.show)))))
