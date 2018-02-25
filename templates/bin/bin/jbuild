@@ -3,6 +3,5 @@
 (executable
  ((name         main)
   (public_name  %%NAME%%)
-  (synopsis     "Description of executable %%NAME%%")
   (libraries    (core))
   (preprocess   (pps (ppx_deriving.std)))))
