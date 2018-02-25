@@ -1,0 +1,38 @@
+lib: [
+  "_build/install/default/lib/nomad/META" {"META"}
+  "_build/install/default/lib/nomad/opam" {"opam"}
+  "_build/install/default/lib/nomad/nomad__Aux.cmi"
+  "_build/install/default/lib/nomad/nomad__Aux.cmx"
+  "_build/install/default/lib/nomad/nomad__Aux.cmt"
+  "_build/install/default/lib/nomad/aux.ml"
+  "_build/install/default/lib/nomad/nomad.cmi"
+  "_build/install/default/lib/nomad/nomad.cmx"
+  "_build/install/default/lib/nomad/nomad.cmt"
+  "_build/install/default/lib/nomad/nomad.ml-gen"
+  "_build/install/default/lib/nomad/nomad__Project.cmi"
+  "_build/install/default/lib/nomad/nomad__Project.cmx"
+  "_build/install/default/lib/nomad/nomad__Project.cmt"
+  "_build/install/default/lib/nomad/project.ml"
+  "_build/install/default/lib/nomad/nomad.cma"
+  "_build/install/default/lib/nomad/nomad.cmxa"
+  "_build/install/default/lib/nomad/nomad.a"
+  "_build/install/default/lib/nomad/nomad.cmxs"
+]
+bin: [
+  "_build/install/default/bin/tests" {"tests"}
+  "_build/install/default/bin/nomad.exe" {"nomad.exe"}
+]
+share: [
+  "_build/install/default/share/nomad/templates/lib/%%NAME%%.opam" {"templates/lib/%%NAME%%.opam"}
+  "_build/install/default/share/nomad/templates/lib/src/%%NAME%%.ml" {"templates/lib/src/%%NAME%%.ml"}
+  "_build/install/default/share/nomad/templates/lib/src/jbuild" {"templates/lib/src/jbuild"}
+  "_build/install/default/share/nomad/templates/lib/test/jbuild" {"templates/lib/test/jbuild"}
+  "_build/install/default/share/nomad/templates/lib/test/tests.ml" {"templates/lib/test/tests.ml"}
+  "_build/install/default/share/nomad/templates/bin/%%NAME%%.opam" {"templates/bin/%%NAME%%.opam"}
+  "_build/install/default/share/nomad/templates/bin/bin/%%NAME%%.ml" {"templates/bin/bin/%%NAME%%.ml"}
+  "_build/install/default/share/nomad/templates/bin/bin/jbuild" {"templates/bin/bin/jbuild"}
+  "_build/install/default/share/nomad/templates/bin/lib/%%NAME%%.ml" {"templates/bin/lib/%%NAME%%.ml"}
+  "_build/install/default/share/nomad/templates/bin/lib/jbuild" {"templates/bin/lib/jbuild"}
+  "_build/install/default/share/nomad/templates/bin/test/jbuild" {"templates/bin/test/jbuild"}
+  "_build/install/default/share/nomad/templates/bin/test/tests.ml" {"templates/bin/test/tests.ml"}
+]

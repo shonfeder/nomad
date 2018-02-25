@@ -1,6 +1,7 @@
 open Nomad
 open Cmdliner
 
+(* TODO: Allow adding existing directory with `init` *)
 (* TODO Should be namespaced under "new" subcommand *)
 let project_name =
   let doc = "The name of the new project" in

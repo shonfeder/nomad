@@ -106,9 +106,11 @@ let make_project_from_template
 let new_project
   : kind -> string -> unit
   = fun kind name ->
-    let template = match kind with
-      | Executable -> raise Not_implemented
-      | Library    -> Filename.concat template_dir "lib"
+    let template = Filename.concat template_dir
+        begin match kind with
+          | Executable -> "bin"
+          | Library    -> "lib"
+        end
     in
     (* TODO Return nice error output, not just crash *)
     match make_project_from_template ~template name with
