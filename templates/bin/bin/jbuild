@@ -3,5 +3,5 @@
 (executable
  ((name         main)
   (public_name  %%NAME%%)
-  (libraries    (core))
+  (libraries    (%%NAME%% core))
   (preprocess   (pps (ppx_deriving.std)))))
