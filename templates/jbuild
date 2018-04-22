@@ -8,10 +8,10 @@
     (lib/src/jbuild      as templates/lib/src/jbuild)
     (lib/test/jbuild     as templates/lib/test/jbuild)
     (lib/test/tests.ml   as templates/lib/test/tests.ml)
-    (lib/.gitignore      as templates/bin/.gitignore)
+    (lib/.gitignore      as templates/lib/.gitignore)
 
     (bin/%%NAME%%.opam   as templates/bin/%%NAME%%.opam)
-    (bin/bin/%%NAME%%.ml as templates/bin/bin/%%NAME%%.ml)
+    (bin/bin/main.ml     as templates/bin/bin/main.ml)
     (bin/bin/jbuild      as templates/bin/bin/jbuild)
     (bin/lib/%%NAME%%.ml as templates/bin/lib/%%NAME%%.ml)
     (bin/lib/jbuild      as templates/bin/lib/jbuild)
