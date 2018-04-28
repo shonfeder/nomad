@@ -10,4 +10,12 @@
       - [ ] =--bin= add a new executable
       - [ ] =--rule= add a new rule
       - [ ] =--reso= add a new resource
-                     
+** TODO User config
+   Specifies common preferences
+   - which base library to use
+   - which testing tools to use
+   - etc.
+** TODO User templates
+   Users can provide templates at the command line or via a config.
+** TODO Auto install packages from dune configs
+** TODO Emacs integration?
