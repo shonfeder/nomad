@@ -1,0 +1,13 @@
+* Tasks
+** TODO Subcommands
+   - [ ] =new= :: Create new projects
+   With options
+      - [x] =--lib= :: Create a library
+      - [ ] =--bin= :: Create an executable
+   - [ ] =add= :: Add a new part to an existing project
+   With options
+      - [ ] =--lib= add a new library
+      - [ ] =--bin= add a new executable
+      - [ ] =--rule= add a new rule
+      - [ ] =--reso= add a new resource
+                     
