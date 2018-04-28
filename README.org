@@ -1,0 +1,35 @@
+#+TITLE: Nomad: Portable Habitations in OCaml's Dunes
+
+A tiny, minimally functional project launcher (maybe more general utility) for
+OCaml, using [[https://github.com/ocaml/dune][Dune]].
+* Install
+
+  1. [[https://opam.ocaml.org/doc/Install.html#Using-your-distribution-39-s-package-system][Install opam]].
+  2. [[https://github.com/ocaml/dune#installation][Install dune]] (formerly "jbuilder")
+  3. Clone this repo, build,and install
+    #+BEGIN_SRC sh
+    git clone https://github.com/shonfeder/nomad.git
+    cd nomad
+    jbuilder build @install && jbuilder install
+    #+END_SRC
+
+* Usage
+** Create a new project that will build to a binary
+   If you project's name is =dingus=
+   #+BEGIN_SRC sh
+   nomad.exe --bin dingus
+   #+END_SRC
+   And a template to being writing and building dingus will be created in the
+   directory =./dingus=.
+** Create a new project that will build to a library
+   If you project's name is =dingus=
+   #+BEGIN_SRC sh
+   nomad.exe --lib dingus
+   #+END_SRC
+   And a template to being writing and building dingus will be created in the
+   directory =./dingus=.
+
+* Plans
+
+  Depending on how dune develops, this tool might mercifully be obviated. In the
+  meantime, you can see my [[https://github.com/shonfeder/nomad/blob/master/project.org][project.org]] for some plans and ideas.
