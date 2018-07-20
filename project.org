@@ -19,3 +19,4 @@
    Users can provide templates at the command line or via a config.
 ** TODO Auto install packages from dune configs
 ** TODO Emacs integration?
+*** TODO Add dependency

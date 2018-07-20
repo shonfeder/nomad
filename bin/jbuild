@@ -2,7 +2,7 @@
 
 (executable
  ((name        main)
-  (public_name nomad.exe)
+  (public_name nomad)
   (libraries  (core
                cmdliner
                nomad))

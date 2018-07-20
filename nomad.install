@@ -21,7 +21,7 @@ lib: [
 ]
 bin: [
   "_build/install/default/bin/tests" {"tests"}
-  "_build/install/default/bin/nomad.exe" {"nomad.exe"}
+  "_build/install/default/bin/nomad" {"nomad"}
 ]
 share: [
   "_build/install/default/share/nomad/templates/lib/%%NAME%%.opam" {"templates/lib/%%NAME%%.opam"}
@@ -38,4 +38,7 @@ share: [
   "_build/install/default/share/nomad/templates/bin/test/jbuild" {"templates/bin/test/jbuild"}
   "_build/install/default/share/nomad/templates/bin/test/tests.ml" {"templates/bin/test/tests.ml"}
   "_build/install/default/share/nomad/templates/bin/.gitignore" {"templates/bin/.gitignore"}
+]
+doc: [
+  "_build/install/default/doc/nomad/README.org"
 ]
