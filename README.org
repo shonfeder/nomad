@@ -2,6 +2,10 @@
 
 A tiny, minimally functional project launcher (maybe more general utility) for
 OCaml, using [[https://github.com/ocaml/dune][Dune]].
+
+*NOTE:* This is not yet updated for Dune 1.0.0, and [[https://discuss.ocaml.org/t/updated-dune-starter-kit/2342/3?u=shonfeder][recent discussion]] on the ocaml discuss forum hopefully indicates the need for this tool is vanishing.
+ on the ocaml discuss forum hopefully indicates the need for this tool is vanishing.
+
 * Install
 
   1. [[https://opam.ocaml.org/doc/Install.html#Using-your-distribution-39-s-package-system][Install opam]].
