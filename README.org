@@ -19,14 +19,14 @@ OCaml, using [[https://github.com/ocaml/dune][Dune]].
    #+BEGIN_SRC sh
    nomad --bin dingus
    #+END_SRC
-   And a template to being writing and building dingus will be created in the
+   And a scaffold for building the dingus executable will be created in the
    directory =./dingus=.
 ** Create a new project that will build to a library
    If you project's name is =dingus=
    #+BEGIN_SRC sh
    nomad --lib dingus
    #+END_SRC
-   And a template to being writing and building dingus will be created in the
+   And a scaffold for building the dingus library will be created in the
    directory =./dingus=.
 
 * Plans
