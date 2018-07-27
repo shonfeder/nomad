@@ -17,14 +17,14 @@ OCaml, using [[https://github.com/ocaml/dune][Dune]].
 ** Create a new project that will build to a binary
    If you project's name is =dingus=
    #+BEGIN_SRC sh
-   nomad.exe --bin dingus
+   nomad --bin dingus
    #+END_SRC
    And a template to being writing and building dingus will be created in the
    directory =./dingus=.
 ** Create a new project that will build to a library
    If you project's name is =dingus=
    #+BEGIN_SRC sh
-   nomad.exe --lib dingus
+   nomad --lib dingus
    #+END_SRC
    And a template to being writing and building dingus will be created in the
    directory =./dingus=.
