@@ -91,7 +91,7 @@ let substitute_name_in_template_files
   : name:string -> string list -> unit result
   = fun ~name project_file_names ->
     let f = substitute_name_in_template_file ~name in
-    List.map ~f project_file_names |> Result.all_ignore
+    List.map ~f project_file_names |> Result.all_unit
 
 let make_project_from_template
   : ?location:string -> template:string -> string -> unit result
