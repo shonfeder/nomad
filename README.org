@@ -1,7 +1,5 @@
 #+TITLE: Nomad: Portable Habitations in OCaml's Dunes
 
-*NOTE: This package has been superseeded by my work on `dune` adding its `init` subcommand. See [[https://dune.readthedocs.io/en/stable/usage.html#initializing-components][the dune usage docs]].*
-
 A tiny, minimally functional project launcher (maybe more general utility) for
 OCaml, coordinating [[https://github.com/ocaml/dune][Dune]], opam, and other tooling in the ecosystem.
 * Install

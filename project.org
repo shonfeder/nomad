@@ -1,4 +1,10 @@
+* Principles
+** Do not encourage boilerplate!
+
+We do not want a boilerplate generator. We just want a simple tool for tying
+together some other tools and automating some simple configs.
 * Tasks
+** TODO Generate a project config
 ** TODO Subcommands
    - [ ] =new= :: Create new projects
    With options
