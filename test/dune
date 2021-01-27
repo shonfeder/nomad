@@ -3,4 +3,4 @@
  (libraries    core
                qcheck
                nomad)
- (preprocess (pps ppx_deriving.std)))
+ (preprocess (pps ppx_deriving.show)))
