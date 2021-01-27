@@ -1,6 +1,0 @@
-(test
- (name         tests)
- (libraries    core
-               qcheck
-               %%NAME%%))
-

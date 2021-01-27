@@ -1,5 +1,0 @@
-(executable
- (name         main)
- (public_name  %%NAME%%)
- (libraries    (%%NAME%% core))
- (preprocess   (pps ppx_deriving.std)))
