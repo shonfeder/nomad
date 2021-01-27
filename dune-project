@@ -21,7 +21,7 @@ and other tooling in the ecosystem.
   (mdx :build)
   (alcotest :with-test)
    ;  TODO rm core
-   core
+   bos
    ocamlfind
    fileutils
    ppx_deriving

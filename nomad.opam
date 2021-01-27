@@ -14,7 +14,7 @@ depends: [
   "dune" {>= "2.7" & > "2.7"}
   "mdx" {build}
   "alcotest" {with-test}
-  "core"
+  "bos"
   "ocamlfind"
   "fileutils"
   "ppx_deriving"
