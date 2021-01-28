@@ -2,8 +2,6 @@
  (name        nomad)
  (public_name nomad)
  (libraries
-  core
-  findlib
-  fileutils
+  bos
   str)
  (preprocess (pps ppx_deriving.show)))

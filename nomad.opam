@@ -15,9 +15,8 @@ depends: [
   "mdx" {build}
   "alcotest" {with-test}
   "bos"
-  "ocamlfind"
-  "fileutils"
   "ppx_deriving"
+  "kwdcmd"
   "qcheck" {with-test}
   "qcheck-alcotest" {with-test}
   "odoc" {with-doc}

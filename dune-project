@@ -20,11 +20,9 @@ and other tooling in the ecosystem.
   (dune (> 2.7))
   (mdx :build)
   (alcotest :with-test)
-   ;  TODO rm core
    bos
-   ocamlfind
-   fileutils
    ppx_deriving
+   kwdcmd                       ; TODO add as pin dep
   (qcheck :with-test)
   (qcheck-alcotest :with-test)
 ))

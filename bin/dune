@@ -1,5 +1,5 @@
 (executable
  (name        main)
  (public_name nomad)
- (libraries core cmdliner nomad)
+ (libraries cmdliner kwdcmd nomad)
  (preprocess (pps ppx_deriving.show)))

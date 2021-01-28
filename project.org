@@ -3,8 +3,15 @@
 
 We do not want a boilerplate generator. We just want a simple tool for tying
 together some other tools and automating some simple configs.
+
+** Do not privilege walled gardens
+
+Newer tools tend to focused on supporting the GitHub walled garden. We will not
+bow to this complacency to monopolization.
 * Tasks
 ** TODO Generate a project config
+** TODO Generate ocamlformat config
+** TODO Auto install packages from dune configs
 ** TODO Subcommands
    - [ ] =new= :: Create new projects
    With options
@@ -23,6 +30,5 @@ together some other tools and automating some simple configs.
    - etc.
 ** TODO User templates
    Users can provide templates at the command line or via a config.
-** TODO Auto install packages from dune configs
 ** TODO Emacs integration?
 *** TODO Add dependency
