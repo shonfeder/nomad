@@ -19,7 +19,9 @@ end
 module Opam = struct
   let bin = Cmd.v "opam"
 
-  let install_deps = Cmd.(bin % "install" % "." % "--deps-only" % "--with-test")
+  (* TODO Make "yjkla optional?" *)
+  let install_deps =
+    Cmd.(bin % "install" % "--yes" % "." % "--deps-only" % "--with-test")
 end
 
 let ( let* ) = Rresult.( >>= )
