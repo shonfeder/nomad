@@ -26,7 +26,10 @@ let ( let* ) = Rresult.( >>= )
 
 (** TODO add support for common opts *)
 let run () =
-  let* _ = OS.Cmd.run Dune.build in
+  let* _ =
+    (* TODO log error if build fails, but continue, since we still want to sync) *)
+    OS.Cmd.run Dune.build |> Rresult.R.kignore_error ~use:(fun _ -> Ok ())
+  in
   let* _ = OS.Cmd.run Git.add_updated in
   let* _ = OS.Cmd.run Git.(commit "Update dependencies") in
   OS.Cmd.run Opam.install_deps
