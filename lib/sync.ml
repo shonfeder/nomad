@@ -4,7 +4,7 @@ open Bos
 module Git = struct
   let bin = Cmd.v "git"
 
-  let add_updated = Cmd.(bin % "--update" % ".")
+  let add_updated = Cmd.(bin % "add" % "--update" % ".")
 
   let commit msg = Cmd.(bin % "commit" % "-m" % msg)
 end
@@ -31,6 +31,7 @@ let run () =
     (* TODO log error if build fails, but continue, since we still want to sync) *)
     Cmd.run Dune.build
     |> Rresult.R.kignore_error ~use:(fun _ ->
+           print_endline "";
            print_endline "Build failed";
            Ok ())
   in
