@@ -29,7 +29,10 @@ let run () =
   let open OS in
   let* _ =
     (* TODO log error if build fails, but continue, since we still want to sync) *)
-    Cmd.run Dune.build |> Rresult.R.kignore_error ~use:(fun _ -> Ok ())
+    Cmd.run Dune.build
+    |> Rresult.R.kignore_error ~use:(fun _ ->
+           print_endline "Build failed";
+           Ok ())
   in
   let* _ = Cmd.run Git.add_updated in
   let* _ = Cmd.run Git.(commit "Update dependencies") in
