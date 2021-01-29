@@ -1,45 +1,73 @@
 (* TODO *)
 open Bos
 
+let run = OS.Cmd.(run ~err:err_run_out)
+
 module Git = struct
   let bin = Cmd.v "git"
 
-  let add_updated = Cmd.(bin % "add" % "--update" % ".")
+  let add files = run Cmd.(bin % "add" %% of_list files)
 
-  let commit msg = Cmd.(bin % "commit" % "-m" % msg)
+  let changed_files () =
+    Cmd.(bin % "diff" % "--name-only" % "HEAD")
+    |> OS.Cmd.(run_out ~err:err_run_out)
+    |> OS.Cmd.to_lines ~trim:true
+
+  let commit msg = run Cmd.(bin % "commit" % "-m" % msg)
 end
 
 module Dune = struct
   let bin = Cmd.v "dune"
 
   (* TODO find the root first *)
-  let build = Cmd.(bin % "build")
+  let build () =
+    let cmd = Cmd.(bin % "build") in
+    OS.Cmd.(run_out ~err:err_run_out cmd |> out_string)
+
+  let warn_on_lib_not_found = function
+    | Ok (output, (_, `Exited 1)) as result ->
+        if not Bos.Pat.(matches (v {|Error: Library $(LIB) not found.|}) output)
+        then
+          OS.Cmd.success result
+        else (
+          Logs.warn (fun fmt ->
+              fmt "dune build failed -- assuming dependecy unmet");
+          Ok ""
+        )
+    | result -> OS.Cmd.success result
 end
 
 module Opam = struct
   let bin = Cmd.v "opam"
 
-  (* TODO Make "yjkla optional?" *)
-  let install_deps =
-    Cmd.(bin % "install" % "--yes" % "." % "--deps-only" % "--with-test")
+  (* TODO Make "y optional?" *)
+  let install_deps () =
+    run Cmd.(bin % "install" % "--yes" % "." % "--deps-only" % "--with-test")
 end
 
 let ( let* ) = Rresult.( >>= )
 
-(** TODO add support for common opts *)
-(** TODO add logic to run updates on pindeps? *)
-let run () =
-  let open OS in
-  let* _ =
-    Cmd.run Dune.build
-    |> Rresult.R.kignore_error ~use:(fun _ ->
-           (* TODO replace with propper logging *)
-           print_endline "";
-           print_endline "Build failed";
-           Ok ())
+(** Convert all pattern variables to '*', to make it into a shell glob *)
+let pat_to_glob pat =
+  Pat.format ~undef:(fun _ -> "*") Astring.String.Map.empty pat
+
+let dep_spec_file f =
+  Pat.(matches (v "dune-project") f || matches (v "$(PACK).opam") f)
+
+(* TODO add support for common opts *)
+(* TODO add logic to run updates on pindeps? *)
+let run _opts =
+  let* _ = Dune.build () |> Dune.warn_on_lib_not_found in
+  let* () =
+    let* files =
+      Git.changed_files () |> Result.map (fun f -> List.filter dep_spec_file f)
+    in
+    match files with
+    | []    -> Ok ()
+    | files ->
+        let* () = Git.add files in
+        Git.commit "Update dependencies"
   in
-  (* TODO Only add the opam and dune-project files *)
-  let* _ = Cmd.run Git.add_updated in
-  let* _ = Cmd.run Git.(commit "Update dependencies") in
-  let* _ = Cmd.run Opam.install_deps in
-  Cmd.run Dune.build
+  let* () = Opam.install_deps () in
+  let* res = Dune.build () in
+  Ok (ignore res)

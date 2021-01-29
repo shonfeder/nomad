@@ -2,7 +2,7 @@
 type config = { ocamlformat : bool }
 
 (* TODO Find the project root to work from *)
-let run { ocamlformat } =
+let run _opts { ocamlformat } =
   if ocamlformat then
     File.write Defaults.ocamlformat
   else

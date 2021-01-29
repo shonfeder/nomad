@@ -13,8 +13,8 @@ type config =
 let make ~name ~kind () = { name; kind }
 
 (* TODO  *)
-let run : config -> (unit, Rresult.R.msg) result =
+let run : Common.t -> config -> (unit, Rresult.R.msg) result =
  (* TODO add .gitignore *)
  (* TODO add .ocamlformat *)
  (* TODO add .populate dune-project *)
- fun _ -> raise (Failure "TODO")
+ fun _opts _ -> raise (Failure "TODO")

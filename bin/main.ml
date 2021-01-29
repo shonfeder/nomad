@@ -1,5 +1,22 @@
 (* open Nomad *)
+open Bos_setup
 open Kwdcmd
+
+module Common = struct
+  (* TODO WHY IS THIS NOT ENDING UP IN THE MANPAGE? *)
+  let docs = Cmdliner.Manpage.s_options
+
+  let opts =
+    let+ debug =
+      Optional.flag
+        ~flags:[ "d"; "debug" ]
+        ~doc:"set logging to debug level"
+        ~docs
+        ()
+    in
+    (if debug then Logs.(set_level (Some Debug)));
+    Nomad.Common.{ debug }
+end
 
 module Add = struct
   let config =
@@ -8,7 +25,11 @@ module Add = struct
     in
     Nomad.Add.{ ocamlformat }
 
-  let cmd = cmd ~name:"add" ~doc:"add components" (const Nomad.Add.run $ config)
+  let cmd =
+    cmd
+      ~name:"add"
+      ~doc:"add components"
+      (const Nomad.Add.run $ Common.opts $ config)
 end
 
 module New = struct
@@ -38,7 +59,7 @@ module New = struct
     cmd
       ~name:"new"
       ~doc:"begin a new project"
-      (const Nomad.New_project.run $ config)
+      (const Nomad.New_project.run $ Common.opts $ config)
 end
 
 module Sync = struct
@@ -46,7 +67,7 @@ module Sync = struct
     cmd
       ~name:"sync"
       ~doc:"synchronize dependencies"
-      (const Nomad.Sync.run $ unit)
+      (const Nomad.Sync.run $ Common.opts)
 end
 
 (* TODO: Allow adding existing directory with `init` *)

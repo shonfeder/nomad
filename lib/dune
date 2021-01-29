@@ -1,7 +1,7 @@
 (library
  (name        nomad)
  (public_name nomad)
- (libraries
-  bos
-  str)
+ (libraries   bos
+              re
+              str)
  (preprocess (pps ppx_deriving.show)))

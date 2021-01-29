@@ -1,5 +1,6 @@
 (** Default content *)
 
+(*** Default ocamlformat file *)
 let ocamlformat : File.t =
   let path = Fpath.v ".ocamlformat" in
   let content =
