@@ -30,9 +30,9 @@ let ( let* ) = Rresult.( >>= )
 let run () =
   let open OS in
   let* _ =
-    (* TODO log error if build fails, but continue, since we still want to sync) *)
     Cmd.run Dune.build
     |> Rresult.R.kignore_error ~use:(fun _ ->
+           (* TODO replace with propper logging *)
            print_endline "";
            print_endline "Build failed";
            Ok ())
