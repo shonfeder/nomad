@@ -3,8 +3,7 @@
 let ocamlformat : File.t =
   let path = Fpath.v ".ocamlformat" in
   let content =
-    {|\
-exp-grouping = preserve
+    {|exp-grouping = preserve
 break-fun-sig = fit-or-vertical
 break-fun-decl = fit-or-vertical
 wrap-fun-args = false
