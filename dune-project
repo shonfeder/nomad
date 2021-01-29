@@ -20,7 +20,9 @@ and other tooling in the ecosystem.
   (dune (> 2.7))
   (mdx :build)
   (alcotest :with-test)
+   ; TODO pin to versions
    bos
+   re
    ppx_deriving
    kwdcmd                       ; TODO add as pin dep
   (qcheck :with-test)

@@ -15,6 +15,7 @@ depends: [
   "mdx" {build}
   "alcotest" {with-test}
   "bos"
+  "re"
   "ppx_deriving"
   "kwdcmd"
   "qcheck" {with-test}
