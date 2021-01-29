@@ -27,6 +27,7 @@ end
 let ( let* ) = Rresult.( >>= )
 
 (** TODO add support for common opts *)
+(** TODO add logic to run updates on pindeps? *)
 let run () =
   let open OS in
   let* _ =
@@ -37,6 +38,7 @@ let run () =
            print_endline "Build failed";
            Ok ())
   in
+  (* TODO Only add the opam and dune-project files *)
   let* _ = Cmd.run Git.add_updated in
   let* _ = Cmd.run Git.(commit "Update dependencies") in
   let* _ = Cmd.run Opam.install_deps in
