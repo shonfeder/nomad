@@ -19,6 +19,7 @@ and other tooling in the ecosystem.
  (depends
   (dune (> 2.7))
   (mdx :build)
+  (ocaml (>= 4.12))
   (alcotest :with-test)
    ; TODO pin to versions
    bos

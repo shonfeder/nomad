@@ -13,6 +13,7 @@ license: "MIT"
 depends: [
   "dune" {>= "2.7" & > "2.7"}
   "mdx" {build}
+  "ocaml" {>= "4.12"}
   "alcotest" {with-test}
   "bos"
   "re"
