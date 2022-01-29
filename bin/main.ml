@@ -65,8 +65,16 @@ module Sync = struct
        Nomad.Sync.run opts
 end
 
+(* module Subst = struct
+ *   let cmd =
+ *     cmd ~name:"subst" ~doc:"substitute template vars"
+ *       @@ let+ opts = Common.opts in
+ *       (\* TODO support for custom substutition params *\)
+ *       Nomad.Sust.run opts
+ * end *)
+
 let () =
-  Exec.select
+  Exec.commands
     ~name:"nomad"
     ~version:"%%VERSION%%"
     ~doc:"roam freely, building projects and packages with ease"

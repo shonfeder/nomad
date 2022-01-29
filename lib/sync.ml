@@ -16,27 +16,6 @@ module Git = struct
   let commit msg = run Cmd.(bin % "commit" % "-m" % msg)
 end
 
-module Dune = struct
-  let bin = Cmd.v "dune"
-
-  (* TODO find the root first *)
-  let build () =
-    let cmd = Cmd.(bin % "build") in
-    OS.Cmd.(run_out ~err:err_run_out cmd |> out_string)
-
-  let warn_on_lib_not_found = function
-    | Ok (output, (_, `Exited 1)) as result ->
-        if not Bos.Pat.(matches (v {|Error: Library $(LIB) not found.|}) output)
-        then
-          OS.Cmd.success result
-        else (
-          Logs.warn (fun fmt ->
-              fmt "dune build failed -- assuming dependecy unmet");
-          Ok ""
-        )
-    | result -> OS.Cmd.success result
-end
-
 module Opam = struct
   let bin = Cmd.v "opam"
 
@@ -57,7 +36,7 @@ let dep_spec_file f =
 (* TODO add support for common opts *)
 (* TODO add logic to run updates on pindeps? *)
 let run _opts =
-  let* _ = Dune.build () |> Dune.warn_on_lib_not_found in
+  let* _ = Dune_cmd.build () |> Dune_cmd.warn_on_lib_not_found in
   let* () =
     let* files =
       Git.changed_files () |> Result.map (fun f -> List.filter dep_spec_file f)
@@ -69,5 +48,5 @@ let run _opts =
         Git.commit "Update dependencies"
   in
   let* () = Opam.install_deps () in
-  let* res = Dune.build () in
+  let* res = Dune_cmd.build () in
   Ok (ignore res)

@@ -1,5 +1,4 @@
 (test
  (name         tests)
  (libraries    qcheck
-               nomad)
- (preprocess (pps ppx_deriving.show)))
+               nomad))

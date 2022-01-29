@@ -1,3 +1,5 @@
+open! Bos
+
 module Kind = struct
   type t =
     | Library
@@ -17,4 +19,9 @@ let run : Common.t -> config -> (unit, Rresult.R.msg) result =
  (* TODO add .gitignore *)
  (* TODO add .ocamlformat *)
  (* TODO add .populate dune-project *)
- fun _opts _ -> raise (Failure "TODO")
+  (* fun opts {name = _; kind = _} -> *)
+  fun _ ->
+  raise (Failure "TODO")
+
+  (* match kind with
+   *  | Library -> *)

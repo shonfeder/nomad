@@ -22,7 +22,8 @@ bow to this complacency to monopolization.
       - [ ] =--lib= add a new library
       - [ ] =--bin= add a new executable
       - [ ] =--rule= add a new rule
-      - [ ] =--reso= add a new resource
+      - [ ] =--dep= add a new resource
+      - [ ] =--ocamlformat== add a new ocamlformat file
 ** TODO User config
    Specifies common preferences
    - which base library to use
@@ -32,3 +33,5 @@ bow to this complacency to monopolization.
    Users can provide templates at the command line or via a config.
 ** TODO Emacs integration?
 *** TODO Add dependency
+** TODO Install pin-depends
+** PPX to convert ocaml to dune expressions?
