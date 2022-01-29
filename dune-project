@@ -26,6 +26,7 @@ and other tooling in the ecosystem.
    re
    kwdcmd                       ; TODO add as pin dep
    ppx_string
+   sexplib
   ; Tests
   (alcotest :with-test)
   (qcheck :with-test)

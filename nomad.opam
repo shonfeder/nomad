@@ -20,6 +20,7 @@ depends: [
   "re"
   "kwdcmd"
   "ppx_string"
+  "sexplib"
   "alcotest" {with-test}
   "qcheck" {with-test}
   "qcheck-alcotest" {with-test}
