@@ -32,7 +32,7 @@ module Add = struct
 end
 
 module New = struct
-  module Kind = Nomad.New_project.Kind
+  module Kind = Nomad.Project.Kind
 
   (* TODO: Allow adding existing directory with `init` *)
   (* TODO also take a Add config, to allow specifing parts to ommit?  *)

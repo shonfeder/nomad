@@ -4,8 +4,7 @@ let bin = Cmd.v "dune"
 
 (* TODO find the root first *)
 let build () =
-  let cmd = Cmd.(bin % "build") in
-  OS.Cmd.(run_out ~err:err_run_out cmd |> out_string)
+  Cmd_util.run Cmd.(bin % "build")
 
 let warn_on_lib_not_found = function
   | Ok (output, (_, `Exited 1)) as result ->
@@ -18,3 +17,8 @@ let warn_on_lib_not_found = function
       Ok ""
     )
   | result -> OS.Cmd.success result
+
+let init : string -> Project.Kind.t -> Cmd_util.result  =
+  fun name kind ->
+  let kind = "--kind=" ^ Project.Kind.to_string kind in
+  Cmd_util.run_success Cmd.(bin % "init" % "project" % kind % name)

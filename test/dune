@@ -2,3 +2,6 @@
  (name         tests)
  (libraries    qcheck
                nomad))
+
+(cram
+ (deps %{bin:nomad}))

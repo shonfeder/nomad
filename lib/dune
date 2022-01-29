@@ -3,4 +3,5 @@
  (public_name nomad)
  (libraries   bos
               re
-              str))
+              str)
+ (preprocess (pps ppx_string)))
