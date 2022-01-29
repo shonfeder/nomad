@@ -13,11 +13,10 @@ license: "MIT"
 depends: [
   "dune" {>= "2.7" & > "2.7"}
   "mdx" {build}
-  "ocaml" {>= "4.12"}
+  "ocaml" {>= "5.00"}
   "alcotest" {with-test}
   "bos"
   "re"
-  "ppx_deriving"
   "kwdcmd"
   "qcheck" {with-test}
   "qcheck-alcotest" {with-test}
@@ -36,4 +35,7 @@ build: [
     "@runtest" {with-test}
     "@doc" {with-doc}
   ]
+]
+pin-depends: [
+  ["kwdcmd.dev" "../kwdcmd"]
 ]
