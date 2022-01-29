@@ -10,14 +10,17 @@ and other tooling in the ecosystem.
 maintainer: ["TODO"]
 authors: ["Shon Feder"]
 license: "MIT"
+homepage: "https://github.com/shonfeder/nomad"
+bug-reports: "https://github.com/shonfeder/nomad/issues"
 depends: [
-  "dune" {>= "2.7" & > "2.7"}
+  "dune" {>= "2.9" & > "2.7"}
   "mdx" {build}
   "ocaml" {>= "4.13"}
-  "alcotest" {with-test}
   "bos"
   "re"
   "kwdcmd"
+  "ppx_string"
+  "alcotest" {with-test}
   "qcheck" {with-test}
   "qcheck-alcotest" {with-test}
   "odoc" {with-doc}
@@ -31,11 +34,14 @@ build: [
     name
     "-j"
     jobs
+    "--promote-install-files=false"
     "@install"
     "@runtest" {with-test}
     "@doc" {with-doc}
   ]
+  ["dune" "install" "-p" name "--create-install-files" name]
 ]
+dev-repo: "git+https://github.com/shonfeder/nomad.git"
 pin-depends: [
   ["kwdcmd.dev" "../kwdcmd"]
 ]

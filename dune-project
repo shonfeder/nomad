@@ -1,12 +1,13 @@
-(lang dune 2.7)
-(name nomad)
-
+(lang dune 2.9)
+(cram enable)
 (generate_opam_files true)
 
-; (source (github mirage/ocaml-cohttp))
+
+(name nomad)
 (license MIT)
 (authors "Shon Feder")
 (maintainers "TODO")
+(source (github shonfeder/nomad))
 
 (package
  (name nomad)
@@ -20,11 +21,13 @@ and other tooling in the ecosystem.
   (dune (> 2.7))
   (mdx :build)
   (ocaml (>= 4.13))
-  (alcotest :with-test)
    ; TODO pin to versions
    bos
    re
    kwdcmd                       ; TODO add as pin dep
+   ppx_string
+  ; Tests
+  (alcotest :with-test)
   (qcheck :with-test)
   (qcheck-alcotest :with-test)
 ))
