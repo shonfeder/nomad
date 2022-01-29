@@ -19,12 +19,11 @@ and other tooling in the ecosystem.
  (depends
   (dune (> 2.7))
   (mdx :build)
-  (ocaml (>= 4.12))
+  (ocaml (>= 5.00))
   (alcotest :with-test)
    ; TODO pin to versions
    bos
    re
-   ppx_deriving
    kwdcmd                       ; TODO add as pin dep
   (qcheck :with-test)
   (qcheck-alcotest :with-test)
