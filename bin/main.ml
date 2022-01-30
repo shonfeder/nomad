@@ -22,6 +22,7 @@ module Common = struct
         ~doc:"Use the supplied config file (defaults to ~/.nomad/config.sexp)"
         ~conv:Arg.(some Arg.(conv (Fpath.of_string, Fpath.pp)))
         ~default:None
+        ~docs
         ()
     in
     let open Nomad.Result.Let in
@@ -107,14 +108,6 @@ module Sync = struct
        let* opts in
        Nomad.Sync.run opts
 end
-
-(* module Subst = struct
- *   let cmd =
- *     cmd ~name:"subst" ~doc:"substitute template vars"
- *       @@ let+ opts = Common.opts in
- *       (\* TODO support for custom substutition params *\)
- *       Nomad.Sust.run opts
- * end *)
 
 let () =
   Exec.commands
