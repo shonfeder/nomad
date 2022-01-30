@@ -21,10 +21,11 @@ type-decl = sparse
   { path; content }
 
 let dune_project ~dir ~name ({ author; username } : Config.t) : File.t =
+  let dune_version = "2.9" in
   let path = Fpath.(dir / "dune-project") in
   let content =
     [%string
-      {|(lang dune 2.9)
+      {|(lang dune %{dune_version})
 (cram enable)
 (generate_opam_files true)
 
@@ -39,7 +40,7 @@ let dune_project ~dir ~name ({ author; username } : Config.t) : File.t =
  (synopsis "Short description")
  (description "Longer description")
  (depends
-  (dune (> 2.9))
+  (dune (> %{dune_version}))
   ocaml
   (alcotest :with-test)
   (qcheck :with-test)

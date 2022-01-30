@@ -4,7 +4,7 @@ let bin = Cmd.v "dune"
 
 (* TODO find the root first *)
 let build () =
-  Cmd_util.run Cmd.(bin % "build")
+  Cmd_util.run_out Cmd.(bin % "build")
 
 let warn_on_lib_not_found = function
   | Ok (output, (_, `Exited 1)) as result ->

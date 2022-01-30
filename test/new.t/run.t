@@ -5,7 +5,7 @@ Create an empty config to avoid searching into the runner environments file syst
 Initialize a new executable
 
   $ echo '((author "Shon Feder") (username shonfeder))' > config.sexp
-  $ nomad new --bin new_project --config config.sexp
+  $ nomad new --bin new_project --config config.sexp | grep "Done."
   $ ls -a new_project
   .
   ..
