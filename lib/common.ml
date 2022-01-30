@@ -1,1 +1,4 @@
-type t = { debug : bool }
+type t =
+  { debug : bool
+  ; config : Config.t
+  }

@@ -1,8 +1,8 @@
 (** Default content *)
 
 (** Default ocamlformat file *)
-let ocamlformat : File.t =
-  let path = Fpath.v ".ocamlformat" in
+let ocamlformat ?(dir = Fpath.v ".") () : File.t =
+  let path = Fpath.(dir / ".ocamlformat") in
   let content =
     {|exp-grouping = preserve
 break-fun-sig = fit-or-vertical
@@ -20,39 +20,41 @@ type-decl = sparse
   in
   { path; content }
 
-(*
-Bos.Pat
-let dune_project : name:string -> File.t =
-  fun ~name:_ ->
-  {|(lang dune 2.9)
+let dune_project ~dir ~name ({ author; username } : Config.t) : File.t =
+  let path = Fpath.(dir / "dune-project") in
+  let content =
+    [%string
+      {|(lang dune 2.9)
 (cram enable)
 (generate_opam_files true)
 
-(name nomad)
+(name %{name})
 (license MIT)
-(authors "Shon Feder")
-(maintainers "TODO")
-(source (github shonfeder/nomad))
+(authors "%{author}")
+(maintainers "%{author}")
+(source (github %{username}/%{name}))
 
 (package
- (name nomad)
- (synopsis "Portable Habitations in OCaml's Dunes")
- (description "
-A tiny, minimally functional project launcher (maybe more general
-utility) for OCaml, coordinating [[https://github.com/ocaml/dune][Dune]], opam,
-and other tooling in the ecosystem.
-")
+ (name %{name})
+ (synopsis "Short description")
+ (description "Longer description")
  (depends
-  (dune (> 2.7))
-  (mdx :build)
-  (ocaml (>= 4.13))
+  (dune (> 2.9))
+  ocaml
   (alcotest :with-test)
-   ; TODO pin to versions
-   bos
-   re
-   kwdcmd                       ; TODO add as pin dep
   (qcheck :with-test)
   (qcheck-alcotest :with-test)
 ))
-|}
-*)
+|}]
+  in
+  { path; content }
+
+let gitignore ?(dir = Fpath.v ".") () : File.t =
+  let path = Fpath.(dir / ".gitignore") in
+  let content = {|
+# Dune build directory
+_build/
+# Opam switch directory
+_opam/
+|} in
+  { path; content }

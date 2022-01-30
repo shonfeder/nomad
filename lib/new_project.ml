@@ -8,21 +8,19 @@ type config =
 (** TODO use ppx_fields_conv *)
 let make ~name ~kind () = { name; kind }
 
-let ( let* ) = Result.bind
-
 (* TODO  *)
 let run : Common.t -> config -> (unit, Rresult.R.msg) result =
  (* TODO add .gitignore *)
- (* TODO add .ocamlformat *)
  (* TODO add .populate dune-project *)
-  (* fun opts {name = _; kind = _} -> *)
-  fun _opts {name; kind} ->
-  let* res = Dune_cmd.init name kind in
-  Ok (ignore res)
+ (* fun opts {name = _; kind = _} -> *)
+ fun { config; _ } { name; kind } ->
+  let open Result.Let in
+  let* () = Dune_cmd.init name kind in
+  let dir = Fpath.v name in
+  let* () = Add.dune_project ~dir ~name config () in
+  let* () = Add.gitignore ~dir () in
+  let+ () = Add.ocamlformat ~dir () in
+  ()
 
-
-
-
-
-  (* match kind with
-   *  | Library -> *)
+(* match kind with
+ *  | Library -> *)
