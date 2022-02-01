@@ -44,5 +44,5 @@ build: [
 ]
 dev-repo: "git+https://github.com/shonfeder/nomad.git"
 pin-depends: [
-  ["kwdcmd.dev" "../kwdcmd"]
+  ["kwdcmd.dev" "git@github.com:shonfeder/kwdcmd.git"]
 ]
