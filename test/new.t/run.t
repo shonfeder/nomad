@@ -6,11 +6,15 @@ Initialize a new executable
 
   $ echo '((author "Shon Feder") (username shonfeder))' > config.sexp
   $ nomad new --bin new_project --config config.sexp | grep "Done."
+  Done.
+  Done.
   $ ls -a new_project
   .
   ..
   .gitignore
   .ocamlformat
+  _build
+  _opam
   bin
   dune-project
   lib
