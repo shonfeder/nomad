@@ -4,8 +4,7 @@
  (libraries   bos
               re
               str
-              sexplib
-              containers)
+              sexplib)
  (preprocess (pps
               ppx_string
               ppx_sexp_conv)))
