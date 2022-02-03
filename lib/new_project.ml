@@ -18,6 +18,8 @@ let run : Common.t -> config -> (unit, Rresult.R.msg) result =
   (** Enter project dir and set up *)
   let* () = OS.Dir.set_current dir in
   let* () = Git_cmd.init () in
+  let* () = Git_cmd.add ["."] in
+  let* () = Git_cmd.commit "Initiate project" in
   let* () = Opam_cmd.create_switch () in
   let+ () = Sync.run opts in
   ()

@@ -11,6 +11,7 @@ Initialize a new executable
   $ ls -a new_project
   .
   ..
+  .git
   .gitignore
   .ocamlformat
   _build
