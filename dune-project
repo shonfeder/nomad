@@ -20,15 +20,14 @@ and other tooling in the ecosystem.
  (depends
   (dune (> 2.7))
   (mdx :build)
-  (ocaml (>= 4.13))
+  (ocaml (>= 4.05))
    ; TODO pin to versions
    bos
    re
-   kwdcmd                       ; TODO add as pin dep
+   kwdcmd
    ppx_string
    sexplib
   ; Tests
   (alcotest :with-test)
   (qcheck :with-test)
-  (qcheck-alcotest :with-test)
-))
+  (qcheck-alcotest :with-test)))
