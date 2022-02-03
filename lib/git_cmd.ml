@@ -2,7 +2,7 @@ open Bos
 
 let bin = Cmd.v "git"
 
-let init () = Cmd.(bin % "init")
+let init () = Cmd_util.run Cmd.(bin % "init")
 let add files = Cmd_util.run Cmd.(bin % "add" %% of_list files)
 
 let changed_files () =
