@@ -95,7 +95,7 @@ module Config = struct
          2
          stdout
          (Nomad.Config.sexp_of_t opts.config);
-       print_newline
+       print_newline ()
 end
 
 module Sync = struct
