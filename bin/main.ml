@@ -41,10 +41,7 @@ module Add = struct
            ~doc:"add a .ocamlformat file"
            ()
        and+ gitignore =
-         Optional.flag
-           ~flags:[ "gitignore" ]
-           ~doc:"add a gitignore file"
-           ()
+         Optional.flag ~flags:[ "gitignore" ] ~doc:"add a gitignore file" ()
        and+ dune_project =
          Optional.value
            "PROJECT_NAME"
@@ -97,7 +94,8 @@ module Config = struct
        Sexplib.Sexp.output_hum_indent
          2
          stdout
-         (Nomad.Config.sexp_of_t opts.config)
+         (Nomad.Config.sexp_of_t opts.config);
+       print_newline
 end
 
 module Sync = struct
