@@ -12,18 +12,6 @@ bow to this complacency to monopolization.
 ** TODO Generate a project config
 ** TODO Generate ocamlformat config
 ** TODO Auto install packages from dune configs
-** TODO Subcommands
-   - [ ] =new= :: Create new projects
-   With options
-      - [x] =--lib= :: Create a library
-      - [x] =--bin= :: Create an executable
-   - [ ] =add= :: Add a new part to an existing project
-   With options
-      - [ ] =--lib= add a new library
-      - [ ] =--bin= add a new executable
-      - [ ] =--rule= add a new rule
-      - [ ] =--dep= add a new resource
-      - [ ] =--ocamlformat== add a new ocamlformat file
 ** TODO User config
    Specifies common preferences
    - which base library to use
@@ -34,4 +22,14 @@ bow to this complacency to monopolization.
 ** TODO Emacs integration?
 *** TODO Add dependency
 ** TODO Install pin-depends
+** Add =install= subcommand
+Install the package in opam and add it to =dune-project=.
 ** PPX to convert ocaml to dune expressions?
+** DONE Subcommands
+   - [X] =new= :: Create new projects, with options
+     - [X] =--lib= :: Create a library
+     - [X] =--bin= :: Create an executable
+   - [X] =add= :: Add a new part to an existing project, with options
+     - [X] =--ocamlformat== add a new ocamlformat file
+     - [X] =--dune-project== add a new dune-project file
+     - [X] =--gitignore== add a .gitignore file

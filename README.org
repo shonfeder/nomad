@@ -2,34 +2,50 @@
 
 A tiny, minimally functional project launcher (maybe more general utility) for
 OCaml, coordinating [[https://github.com/ocaml/dune][Dune]], opam, and other tooling in the ecosystem.
+
 * Install
 
-  1. [[https://opam.ocaml.org/doc/Install.html#Using-your-distribution-39-s-package-system][Install opam]].
-  2. [[https://github.com/ocaml/dune#installation][Install dune]] (formerly "jbuilder")
-  3. Clone this repo, build,and install
-    #+BEGIN_SRC sh
-    git clone https://github.com/shonfeder/nomad.git
-    cd nomad
-    jbuilder build @install && jbuilder install
-    #+END_SRC
+Assuing you have installed [[https://opam.ocaml.org/doc/Install.html#Using-your-distribution-39-s-package-system][opam]]  and [[https://github.com/ocaml/dune#installation][dune]]:
+
+#+begin_src sh
+opam pin git@github.com:shonfeder/nomad.git
+#+end_src
 
 * Usage
-** Create a new project that will build to a binary
-   If you project's name is =dingus=
-   #+BEGIN_SRC sh
-   nomad --bin dingus
-   #+END_SRC
-   And a scaffold for building the dingus executable will be created in the
-   directory =./dingus=.
-** Create a new project that will build to a library
-   If you project's name is =dingus=
-   #+BEGIN_SRC sh
-   nomad --lib dingus
-   #+END_SRC
-   And a scaffold for building the dingus library will be created in the
-   directory =./dingus=.
 
-* Plans
+** Create a new project to build a binary
 
-  Depending on how dune develops, this tool might mercifully be obviated. In the
-  meantime, you can see my [[https://github.com/shonfeder/nomad/blob/master/project.org][project.org]] for some plans and ideas.
+If you project's name is =dingus=
+
+#+BEGIN_SRC sh
+nomad new --bin dingus
+#+END_SRC
+
+And a scaffold for building the dingus executable will be created in the
+directory =./dingus=.
+
+** Create a new project to build a library
+
+If you project's name is =dingus=
+
+#+BEGIN_SRC sh
+nomad new --lib dingus
+#+END_SRC
+
+And a scaffold for building the dingus library will be created in the
+directory =./dingus=.
+
+** Sync the dependencies of a project
+
+From the project root
+
+#+begin_src
+nomad sync
+#+end_src
+
+And the dependencies declared in your project's =dune-project= will be synced
+using opam.
+
+* Plans and ideas
+
+See [[https://github.com/shonfeder/nomad/blob/master/project.org][project.org]].
