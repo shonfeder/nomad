@@ -5,6 +5,8 @@ type config =
   ; kind : Project.Kind.t
   }
 
+let switch_plate_url = "https://gitlab.com/shonfeder/switch-plate.git"
+
 (* Create an opam switch *)
 let run : Common.t -> config -> (unit, Rresult.R.msg) result =
  fun ({ config; _ } as opts) { name; kind } ->
@@ -21,5 +23,7 @@ let run : Common.t -> config -> (unit, Rresult.R.msg) result =
   let* () = Git_cmd.add ["."] in
   let* () = Git_cmd.commit "Initiate project" in
   let* () = Opam_cmd.create_switch () in
-  let+ () = Sync.run opts in
+  let* () = Sync.run opts in
+  (* TODO Make additional installs configurable *)
+  let+ () = Opam_cmd.pin switch_plate_url in
   ()

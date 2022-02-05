@@ -8,3 +8,6 @@ let create_switch () =
 (* TODO Make "y optional?" *)
 let install_deps () =
   Cmd_util.run Cmd.(bin % "install" % "--yes" % "." % "--deps-only" % "--with-test")
+
+let pin url =
+  Cmd_util.run Cmd.(bin % "pin" % "--yes" % url)

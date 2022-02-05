@@ -8,6 +8,7 @@ Initialize a new executable
   $ nomad new --bin new_project --config config.sexp | grep "Done."
   Done.
   Done.
+  Done.
   $ ls -a new_project
   .
   ..
