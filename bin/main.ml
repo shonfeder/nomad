@@ -50,10 +50,20 @@ module Add = struct
            ~conv:Arg.(some string)
            ~default:None
            ()
+       and+ opam_template =
+         Optional.value
+           "PROJECT_NAME"
+           ~flags:[ "opam-template" ]
+           ~doc:"add an opam.template file"
+           ~conv:Arg.(some string)
+           ~default:None
+           ()
        in
        let open Nomad.Result.Let in
        let* opts in
-       Nomad.Add.run opts { ocamlformat; dune_project; gitignore }
+       Nomad.Add.run
+         opts
+         { ocamlformat; dune_project; gitignore; opam_template }
 end
 
 module New = struct

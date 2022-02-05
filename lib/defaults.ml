@@ -59,3 +59,11 @@ _build/
 _opam/
 |} in
   { path; content }
+
+let opam_template ~name ?(dir = Fpath.v ".") () : File.t =
+  let path = Fpath.(dir / [%string {|%{name}.opam.template|}]) in
+  let content = {|pin-depends: [
+  ["{package}.dev" "git+https://{forge}/{username}/{repo}.git"]
+]
+|} in
+  {path; content}
