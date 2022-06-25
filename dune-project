@@ -1,4 +1,4 @@
-(lang dune 2.9)
+(lang dune 3.3)
 (cram enable)
 (generate_opam_files true)
 
@@ -18,7 +18,7 @@ utility) for OCaml, coordinating [[https://github.com/ocaml/dune][Dune]], opam,
 and other tooling in the ecosystem.
 ")
  (depends
-  (dune (> 2.7))
+  (dune (> 3.3))
   (mdx :build)
   (ocaml (>= 4.05))
    ; TODO pin to versions
