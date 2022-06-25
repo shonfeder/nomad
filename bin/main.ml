@@ -2,8 +2,6 @@
 open Bos_setup
 open Kwdcmd
 
-exception User_error of string
-
 module Common = struct
   (* TODO WHY IS THIS NOT ENDING UP IN THE MANPAGE? *)
   let docs = Cmdliner.Manpage.s_options
