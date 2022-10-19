@@ -25,22 +25,22 @@ let dune_project ~dir ~name ({ author; username } : Config.t) : File.t =
   let path = Fpath.(dir / "dune-project") in
   let content =
     [%string
-      {|(lang dune %{dune_version})
+      {|(lang dune $(dune_version))
 (cram enable)
 (generate_opam_files true)
 
-(name %{name})
+(name $name)
 (license MIT)
-(authors "%{author}")
-(maintainers "%{author}")
-(source (github %{username}/%{name}))
+(authors "$author")
+(maintainers "$author")
+(source (github $username/$name))
 
 (package
- (name %{name})
+ (name $name)
  (synopsis "Short description")
  (description "Longer description")
  (depends
-  (dune (> %{dune_version}))
+  (dune (> $dune_version))
   ocaml
   (alcotest :with-test)
   (qcheck :with-test)
@@ -61,7 +61,7 @@ _opam/
   { path; content }
 
 let opam_template ~name ?(dir = Fpath.v ".") () : File.t =
-  let path = Fpath.(dir / [%string {|%{name}.opam.template|}]) in
+  let path = Fpath.(dir / [%string {|$(name).opam.template|}]) in
   let content = {|pin-depends: [
   ["{package}.dev" "git+https://{forge}/{username}/{repo}.git"]
 ]

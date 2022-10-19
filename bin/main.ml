@@ -1,5 +1,6 @@
 (* open Nomad *)
 open Bos_setup
+
 open Kwdcmd
 
 module Common = struct
