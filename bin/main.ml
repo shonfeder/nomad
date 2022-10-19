@@ -1,6 +1,5 @@
 (* open Nomad *)
 open Bos_setup
-
 open Kwdcmd
 
 module Common = struct
@@ -31,8 +30,19 @@ module Common = struct
 end
 
 module Add = struct
+  let dep_conv : (string * string option) Arg.conv =
+    let parser s =
+      Stdlib.String.split_on_char '=' s |> function
+      | [] -> failwith "Impossible empty string in CLI arg"
+      | [dep] -> `Ok (dep, None)
+      | [dep; version] ->`Ok (dep, Some version)
+      | _ -> `Error "Invalid dependency specification"
+    in
+    let printer = Fmt.(pair string (option string)) in
+    (parser, printer)
+
   let cmd =
-    cmd ~name:"add" ~doc:"add components"
+    cmd ~name:"add" ~doc:"add components and dependencies"
     @@ let+ opts = Common.opts
        and+ ocamlformat =
          Optional.flag
@@ -57,12 +67,21 @@ module Add = struct
            ~conv:Arg.(some string)
            ~default:None
            ()
+       and+ deps =
+         Optional.all_from
+           "DEPENDENCIES"
+           ~conv:dep_conv
+           ~nth:(-1)
+           ~doc:
+             "dependencies to add, listed as $(b,dep-name) or \
+              $(b,dep-name=version)"
+           ()
        in
        let open Nomad.Result.Let in
-       let* opts in
+       let* opts = opts in
        Nomad.Add.run
          opts
-         { ocamlformat; dune_project; gitignore; opam_template }
+         { ocamlformat; dune_project; gitignore; opam_template; deps }
 end
 
 module New = struct
@@ -90,7 +109,7 @@ module New = struct
              ])
        in
        let open Nomad.Result.Let in
-       let* opts in
+       let* opts = opts in
        Nomad.New_project.(run opts { name; kind })
 end
 
@@ -99,7 +118,7 @@ module Config = struct
     cmd ~name:"config" ~doc:"view the application configurations"
     @@ let+ opts = Common.opts in
        let open Nomad.Result.Let in
-       let+ opts in
+       let+ opts = opts in
        Sexplib.Sexp.output_hum_indent
          2
          stdout
@@ -112,7 +131,7 @@ module Sync = struct
     cmd ~name:"sync" ~doc:"synchronize dependencies"
     @@ let+ opts = Common.opts in
        let open Nomad.Result.Let in
-       let* opts in
+       let* opts = opts in
        Nomad.Sync.run opts
 end
 

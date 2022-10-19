@@ -9,22 +9,25 @@ together some other tools and automating some simple configs.
 Newer tools tend to focused on supporting the GitHub walled garden. We will not
 bow to this complacency to monopolization.
 * Tasks
-** TODO Generate a project config
-** TODO Generate ocamlformat config
-** TODO Auto install packages from dune configs
-** TODO User config
-   Specifies common preferences
-   - which base library to use
-   - which testing tools to use
-   - etc.
+** TODO Extend =add= subcommand to support adding dependencies
+- [ ] extend add subcommand
+- [ ] add the dependency to the =dune-project=
+- [ ] Sync
 ** TODO User templates
    Users can provide templates at the command line or via a config.
 ** TODO Emacs integration?
 *** TODO Add dependency
 ** TODO Install pin-depends
-** Add =install= subcommand
-Install the package in opam and add it to =dune-project=.
-** PPX to convert ocaml to dune expressions?
+** TODO PPX to convert ocaml to dune expressions?
+** TODO Separate out project initialization from dependency installation
+** DONE Generate a project config
+** DONE Generate ocamlformat config
+** DONE Auto install packages from dune configs
+** DONE User config
+   Specifies common preferences
+   - which base library to use
+   - which testing tools to use
+   - etc.
 ** DONE Subcommands
    - [X] =new= :: Create new projects, with options
      - [X] =--lib= :: Create a library
