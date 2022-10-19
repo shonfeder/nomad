@@ -19,7 +19,7 @@ depends: [
   "bos"
   "re"
   "kwdcmd"
-  "ppx_string"
+  "ppx_string_interpolation"
   "sexplib"
   "alcotest" {with-test}
   "qcheck" {with-test}
