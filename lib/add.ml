@@ -2,8 +2,7 @@
 type components =
   { ocamlformat : bool
   ; dune_project : string option
-  ; gitignore : bool
-  (* TODO Infer name from project *)
+  ; gitignore : bool (* TODO Infer name from project *)
   ; opam_template : string option
   ; deps : (string * string option) list
   }
@@ -18,10 +17,6 @@ let gitignore ?(dir = Fpath.v ".") () = Defaults.gitignore ~dir () |> File.write
 let opam_template ~name ?dir () =
   Defaults.opam_template ~name ?dir () |> File.write
 
-let add_deps deps =
-  Dune_config.add_deps deps;
-  Ok ()
-
 let add_if bool f =
   if bool then
     f ()
@@ -30,21 +25,20 @@ let add_if bool f =
 
 (* TODO Find the project root to work from as default location *)
 let run (opts : Common.t) components =
+  let root = Fpath.v "." in
+  (* TODO *)
   let open Result.Let in
+  let* () = Dune_config.add_deps root components.deps in
   let* () = add_if components.ocamlformat ocamlformat in
   let* () = add_if components.gitignore gitignore in
-  let* () = match components.deps with
-    | [] -> Ok ()
-    | deps -> add_deps deps
-  in
   let* () =
     match components.opam_template with
-    | None      -> Ok ()
+    | None -> Ok ()
     | Some name -> opam_template ~name ()
   in
   let+ () =
     match components.dune_project with
-    | None      -> Ok ()
+    | None -> Ok ()
     | Some name -> dune_project ~name opts.config ()
   in
   ()

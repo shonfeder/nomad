@@ -3,11 +3,20 @@ open Bos
 let bin = Cmd.v "opam"
 
 let create_switch () =
-    Cmd_util.run Cmd.(bin % "switch" % "create" % "." % "--deps-only" % "--with-test" % "--quiet" % "--yes")
+  Cmd_util.run
+    Cmd.(
+      bin
+      % "switch"
+      % "create"
+      % "."
+      % "--deps-only"
+      % "--with-test"
+      % "--quiet"
+      % "--yes")
 
 (* TODO Make "y optional?" *)
 let install_deps () =
-  Cmd_util.run Cmd.(bin % "install" % "--yes" % "." % "--deps-only" % "--with-test")
+  Cmd_util.run
+    Cmd.(bin % "install" % "--yes" % "." % "--deps-only" % "--with-test")
 
-let pin url =
-  Cmd_util.run Cmd.(bin % "pin" % "--yes" % url)
+let pin url = Cmd_util.run Cmd.(bin % "pin" % "--yes" % url)

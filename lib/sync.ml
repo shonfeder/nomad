@@ -1,29 +1,25 @@
 (* TODO *)
 open Bos
 
-let ( let* ) = Rresult.( >>= )
-
-(** Convert all pattern variables to '*', to make it into a shell glob *)
-let pat_to_glob pat =
-  Pat.format ~undef:(fun _ -> "*") Astring.String.Map.empty pat
-
 let dep_spec_file f =
   Pat.(matches (v "dune-project") f || matches (v "$(PACK).opam") f)
 
 (* TODO add support for common opts *)
 (* TODO add logic to run updates on pindeps? *)
 let run _opts =
+  let open Result.Let in
   let* _ = Dune_cmd.build () |> Dune_cmd.warn_on_lib_not_found in
   let* () =
     let* files =
-      Git_cmd.changed_files () |> Result.map (fun f -> List.filter dep_spec_file f)
+      Git_cmd.changed_files ()
+      |> Result.map (fun f -> List.filter dep_spec_file f)
     in
     match files with
-    | []    -> Ok ()
+    | [] -> Ok ()
     | files ->
         let* () = Git_cmd.add files in
         Git_cmd.commit "Update dependencies"
   in
   let* () = Opam_cmd.install_deps () in
-  let* res = Dune_cmd.build () in
-  Ok (ignore res)
+  let* _ = Dune_cmd.build () in
+  Ok ()

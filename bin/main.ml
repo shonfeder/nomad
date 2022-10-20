@@ -34,8 +34,8 @@ module Add = struct
     let parser s =
       Stdlib.String.split_on_char '=' s |> function
       | [] -> failwith "Impossible empty string in CLI arg"
-      | [dep] -> `Ok (dep, None)
-      | [dep; version] ->`Ok (dep, Some version)
+      | [ dep ] -> `Ok (dep, None)
+      | [ dep; version ] -> `Ok (dep, Some version)
       | _ -> `Error "Invalid dependency specification"
     in
     let printer = Fmt.(pair string (option string)) in
@@ -78,7 +78,7 @@ module Add = struct
            ()
        in
        let open Nomad.Result.Let in
-       let* opts = opts in
+       let* opts in
        Nomad.Add.run
          opts
          { ocamlformat; dune_project; gitignore; opam_template; deps }
@@ -109,7 +109,7 @@ module New = struct
              ])
        in
        let open Nomad.Result.Let in
-       let* opts = opts in
+       let* opts in
        Nomad.New_project.(run opts { name; kind })
 end
 
@@ -118,7 +118,7 @@ module Config = struct
     cmd ~name:"config" ~doc:"view the application configurations"
     @@ let+ opts = Common.opts in
        let open Nomad.Result.Let in
-       let+ opts = opts in
+       let+ opts in
        Sexplib.Sexp.output_hum_indent
          2
          stdout
@@ -131,7 +131,7 @@ module Sync = struct
     cmd ~name:"sync" ~doc:"synchronize dependencies"
     @@ let+ opts = Common.opts in
        let open Nomad.Result.Let in
-       let* opts = opts in
+       let* opts in
        Nomad.Sync.run opts
 end
 

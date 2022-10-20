@@ -23,8 +23,7 @@ let load_from_file fpath =
       | Sexplib.Conv_error.Of_sexp_error (exn, sexp) ->
           Rresult.R.error_msg @@ Sexplib.Conv.of_sexp_error_exn exn sexp)
 
-let is_config_dir dir =
-  String.equal (Fpath.basename dir) ".nomad"
+let is_config_dir dir = String.equal (Fpath.basename dir) ".nomad"
 
 let find_nearest_config () =
   let open Result.Let in
@@ -43,10 +42,10 @@ let load : Fpath.t option -> (t, Rresult.R.msg) Rresult.result =
   let open Result.Let in
   match config_file with
   | Some f -> load_from_file f
-  | None   -> (
+  | None -> (
       let* config_dir = find_nearest_config () in
       match config_dir with
-      | None            ->
+      | None ->
           Logs.warn (fun f ->
               f "Cannot find nomad config dir, using default config");
           Ok default
@@ -57,7 +56,7 @@ let load : Fpath.t option -> (t, Rresult.R.msg) Rresult.result =
               Logs.warn (fun f ->
                   f "No config file in config dir %a" Fpath.pp config_dir);
               Ok default
-          | Ok _    -> result))
+          | Ok _ -> result))
 
 (* match OS.Env.var "HOME" with
  * | Some home -> (

@@ -52,18 +52,22 @@ let dune_project ~dir ~name ({ author; username } : Config.t) : File.t =
 
 let gitignore ?(dir = Fpath.v ".") () : File.t =
   let path = Fpath.(dir / ".gitignore") in
-  let content = {|
+  let content =
+    {|
 # Dune build directory
 _build/
 # Opam switch directory
 _opam/
-|} in
+|}
+  in
   { path; content }
 
 let opam_template ~name ?(dir = Fpath.v ".") () : File.t =
   let path = Fpath.(dir / [%string {|$(name).opam.template|}]) in
-  let content = {|pin-depends: [
+  let content =
+    {|pin-depends: [
   ["{package}.dev" "git+https://{forge}/{username}/{repo}.git"]
 ]
-|} in
-  {path; content}
+|}
+  in
+  { path; content }

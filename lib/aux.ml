@@ -15,6 +15,7 @@ let count_matches : string -> string -> int =
       try
         let pos = Str.search_forward regexp string pos in
         count (pos + pattern_len) (succ acc)
-      with Not_found -> acc
+      with
+      | Not_found -> acc
     in
     count 0 0

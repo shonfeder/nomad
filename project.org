@@ -9,10 +9,6 @@ together some other tools and automating some simple configs.
 Newer tools tend to focused on supporting the GitHub walled garden. We will not
 bow to this complacency to monopolization.
 * Tasks
-** TODO Extend =add= subcommand to support adding dependencies
-- [ ] extend add subcommand
-- [ ] add the dependency to the =dune-project=
-- [ ] Sync
 ** TODO User templates
    Users can provide templates at the command line or via a config.
 ** TODO Emacs integration?
@@ -20,6 +16,11 @@ bow to this complacency to monopolization.
 ** TODO Install pin-depends
 ** TODO PPX to convert ocaml to dune expressions?
 ** TODO Separate out project initialization from dependency installation
+** TODO Find the project root to work from as default location *)
+[[~/Sync/oss/nomad/lib/add.ml::27]]
+** DONE Extend =add= subcommand to support adding dependencies
+- [x] extend add subcommand
+- [x] add the dependency to the =dune-project=
 ** DONE Generate a project config
 ** DONE Generate ocamlformat config
 ** DONE Auto install packages from dune configs
