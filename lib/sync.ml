@@ -7,6 +7,8 @@ let dep_spec_file f =
 (* TODO add support for common opts *)
 (* TODO add logic to run updates on pindeps? *)
 let run _opts =
+  Result.of_rresult
+  @@
   let open Result.Let in
   let* _ = Dune_cmd.build () |> Dune_cmd.warn_on_lib_not_found in
   let* () =

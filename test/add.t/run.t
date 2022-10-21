@@ -20,8 +20,8 @@ Add a new ocamlformat file
 TODO: Automatically create the file?
 Adding a dep with no dune-project errors
   $ nomad add nodep
-  error: ./dune-project: No such file or directory
-  [1]
+  nomad: ./dune-project: No such file or directory
+  [123]
 
 Add add a new dune-project file
   $ nomad add --dune-project=test_proj

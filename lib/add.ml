@@ -25,6 +25,8 @@ let add_if bool f =
 
 (* TODO Find the project root to work from as default location *)
 let run (opts : Common.t) components =
+  Result.of_rresult
+  @@
   let root = Fpath.v "." in
   (* TODO *)
   let open Result.Let in

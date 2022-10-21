@@ -29,5 +29,5 @@ Default values are supplied when config has missing fields
 When config file supplied by CLI is not found, report error
 
   $ nomad config --config non-existent-file.sexp
-  error: Config file non-existent-file.sexp does not exist
-  [1]
+  nomad: Config file non-existent-file.sexp does not exist
+  [123]

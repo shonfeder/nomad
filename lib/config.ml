@@ -16,16 +16,19 @@ let load_from_file fpath =
   match OS.File.exists fpath with
   | Error _
   | Ok false ->
-      Rresult.R.error_msgf "Config file %a does not exist" Fpath.pp fpath
+      Error
+        (Printf.sprintf "Config file %s does not exist" (Fpath.to_string fpath))
   | Ok true -> (
       let config_file = Fpath.to_string fpath in
       try Ok (Sexplib.Sexp.load_sexp_conv_exn config_file t_of_sexp) with
       | Sexplib.Conv_error.Of_sexp_error (exn, sexp) ->
-          Rresult.R.error_msg @@ Sexplib.Conv.of_sexp_error_exn exn sexp)
+          Error (Sexplib.Conv.of_sexp_error_exn exn sexp))
 
 let is_config_dir dir = String.equal (Fpath.basename dir) ".nomad"
 
 let find_nearest_config () =
+  Result.of_rresult
+  @@
   let open Result.Let in
   let rec search dir =
     let* contents = OS.Dir.contents ~dotfiles:true dir in
@@ -37,7 +40,7 @@ let find_nearest_config () =
   let* cwd = OS.Dir.current () in
   search cwd
 
-let load : Fpath.t option -> (t, Rresult.R.msg) Rresult.result =
+let load : Fpath.t option -> (t, string) Rresult.result =
  fun config_file ->
   let open Result.Let in
   match config_file with
