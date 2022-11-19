@@ -35,7 +35,15 @@ nomad new --lib dingus
 And a scaffold for building the dingus library will be created in the
 directory =./dingus=.
 
-** Sync the dependencies of a project
+** Add a dependency to your project
+
+Suppose we're building a guy with [[https://github.com/sanette/bogue][bogue]]. We can add the dependency with:
+
+#+begin_src
+nomad add bogue
+#+end_src
+
+** Then we can sync all the dependencies of a project
 
 From the project root
 
