@@ -19,7 +19,7 @@ coordinating the existing tools: i.e., [[https://github.com/ocaml/dune][dune]] a
 
 * Install
 
-Assuing you have installed [[https://opam.ocaml.org/doc/Install.html#Using-your-distribution-39-s-package-system][opam]]  and [[https://github.com/ocaml/dune#installation][dune]]:
+Assuming you have installed [[https://opam.ocaml.org/doc/Install.html#Using-your-distribution-39-s-package-system][opam]]  and [[https://github.com/ocaml/dune#installation][dune]]:
 
 #+begin_src sh
 opam pin git@github.com:shonfeder/nomad.git
