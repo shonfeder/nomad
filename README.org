@@ -1,7 +1,21 @@
 #+TITLE: Nomad: Portable Habitations in OCaml's Dunes
 
-A tiny, minimally functional project launcher (maybe more general utility) for
-OCaml, coordinating [[https://github.com/ocaml/dune][Dune]], opam, and other tooling in the ecosystem.
+A tiny, minimally-functional project management tool for OCaml.
+
+* Goal
+
+=nomad='s goal is to automate repetitive aspects of managing OCaml projects by
+coordinating the existing tools: i.e., [[https://github.com/ocaml/dune][dune]] and [[https://opam.ocaml.org/doc/Install.html#Using-your-distribution-39-s-package-system][opam]].
+
+* Ethos and comparison
+
+=nomad= differs from [[https://github.com/ocamlpro/drom][drom]] and [[https://github.com/tmattio/spin][spin]] in its narrow focus and minimal ethos. I.e.:
+
+- Just automate the most repetitive flows, but still expect users to still use opam
+  and dune.
+- Don't generate boilerplate and templates.
+- Don't introduce a bunch of complex features.
+- sexp is perfect: don't introduce new abstraction layers in the configuration format of the week.
 
 * Install
 
