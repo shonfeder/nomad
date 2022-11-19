@@ -92,3 +92,37 @@ Adding a dep with version replaces dep without a version
    (depends (dune (> 2.9)) ocaml (alcotest :with-test) (qcheck :with-test)
     (qcheck-alcotest :with-test) (dep-with-no-version (= 1.0.0))
     (dep-with-version (= 1.0.0))))
+
+Add a dep with a custom dune_project
+
+  $ cat << EOF > custom-dune-project.sexp
+  > ; My custom dune-project file
+  > (name \$(NAME))
+  > (license MIT)
+  > (authors "\$(AUTHOR)")
+  > (maintainers "\$(AUTHOR)")
+  > (source (github \$(USERNAME)/\$(NAME)))
+  > EOF
+
+And configure that for use
+
+  $ echo '((author "Author Name") (username github-username) (dune_project custom-dune-project.sexp))' > config.sexp
+
+checking that we can load our custom config
+
+  $ nomad config --config config.sexp
+  ((author "Author Name") (username github-username)
+    (dune_project custom-dune-project.sexp)
+    (dev_packages
+      (merlin>=4.6.1~5.0preview utop ocp-indent ocp-index odoc odig)))
+
+Now add a new dune-project using that custom config
+
+  $ nomad add --config config.sexp --dune-project=custom_dune_proj
+  $ cat dune-project
+  ; My custom dune-project file
+  (name custom_dune_proj)
+  (license MIT)
+  (authors "Author Name")
+  (maintainers "Author Name")
+  (source (github github-username/custom_dune_proj))

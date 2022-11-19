@@ -10,7 +10,9 @@ type components =
 let ocamlformat ?dir () = Defaults.ocamlformat ?dir () |> File.write
 
 let dune_project ?(dir = Fpath.v ".") ~name config () =
-  Defaults.dune_project ~dir ~name config |> File.write
+  let open Result.Let in
+  let* f = Defaults.dune_project ~dir ~name config in
+  File.write f
 
 let gitignore ?(dir = Fpath.v ".") () = Defaults.gitignore ~dir () |> File.write
 

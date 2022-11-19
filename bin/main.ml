@@ -17,7 +17,7 @@ module Common = struct
       Optional.value
         "CONFIG"
         ~flags:[ "config" ]
-        ~doc:"Use the supplied config file (defaults to ~/.nomad/config.sexp)"
+        ~doc:"Use the supplied config file (defaults to most proximate .nomad/config.sexp in parent directories, and falling back to ~/.nomad/config.sexp)"
         ~conv:Arg.(some Arg.(conv (Fpath.of_string, Fpath.pp)))
         ~default:None
         ~docs

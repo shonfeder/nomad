@@ -11,13 +11,42 @@ CD into the new project
 
   $ cd new_project
 
+Create a light-weight dune-project file
+
+  $ mkdir .nomad
+  $ echo '((dune_project ./nomad/custom-dune-project.sexp) (dev_packages ()))' > .nomad/config.sexp
+  $ nomad config
+  ((author "Author Name") (username github-username)
+    (dune_project ./nomad/custom-dune-project.sexp) (dev_packages ()))
+  $ cat <<EOF > .nomad/custom-dune-proj.sexp
+  > (lang dune 2.9)
+  > (name \$(NAME))
+  > (license MIT)
+  > (authors "\$(AUTHOR)")
+  > (maintainers "\$(AUTHOR)")
+  > (source (github \$(USERNAME)/\$(NAME)))
+  > (package
+  >  (name $name)
+  >  (synopsis "Short description")
+  >  (description "Longer description")
+  >  (depends
+  >    (dune (> 2.9))
+  >    ocaml
+  > ))
+  > EOF
+
 Can sync the dependencies
 
   $ nomad sync | grep -o Done.
   Done.
   Done.
-  Done.
 
-We can build the tests
+Add an unmet library dependency
 
-  $ dune test
+  $ echo "(library (name new_project) (libraries curly))" > lib/dune
+  $ nomad add curly
+
+We should be able to sync it, despite the initial dune build failing due to the missing
+library dependency
+
+  $ nomad sync

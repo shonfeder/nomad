@@ -3,9 +3,20 @@
 open Bos
 open Sexplib.Std
 
+let dev_dep_defaults =
+  [ "merlin>=4.6.1~5.0preview" (*  OCaml 5 compat *)
+  ; "utop"
+  ; "ocp-indent"
+  ; "ocp-index"
+  ; "odoc"
+  ; "odig"
+  ]
+
 type t =
   { author : string [@default "Author Name"]
   ; username : string [@default "github-username"]
+  ; dune_project : string option [@sexp.option]
+  ; dev_packages : string list [@sepx.option] [@default dev_dep_defaults]
   }
 [@@deriving sexp]
 
@@ -60,18 +71,3 @@ let load : Fpath.t option -> (t, string) Rresult.result =
                   f "No config file in config dir %a" Fpath.pp config_dir);
               Ok default
           | Ok _ -> result))
-
-(* match OS.Env.var "HOME" with
- * | Some home -> (
- *     let config_file = Fpath.(v home / ".nomad" / "config.sexp") in
- *     let result = load_from_file config_file in
- *     match result with
- *     | Error _ ->
- *         Logs.warn (fun f ->
- *             f "Cannot load config file from %a" Fpath.pp config_file);
- *         Ok default
- *     | Ok _    -> result)
- * | None      ->
- *     Logs.warn (fun f ->
- *         f "HOME environment variable not set. Cannot load default config.");
- *     Ok default *)

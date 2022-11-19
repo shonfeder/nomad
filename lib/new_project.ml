@@ -5,8 +5,6 @@ type config =
   ; kind : Project.Kind.t
   }
 
-let switch_plate_url = "https://gitlab.com/shonfeder/switch-plate.git"
-
 (* Create an opam switch *)
 let run : Common.t -> config -> (unit, string) result =
  fun { config; _ } { name; kind } ->

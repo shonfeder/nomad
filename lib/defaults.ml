@@ -20,12 +20,10 @@ type-decl = sparse
   in
   { path; content }
 
-let dune_project ~dir ~name ({ author; username } : Config.t) : File.t =
+let default_dune_project ~name ~author ~username =
   let dune_version = "2.9" in
-  let path = Fpath.(dir / "dune-project") in
-  let content =
-    [%string
-      {|(lang dune $(dune_version))
+  [%string
+    {|(lang dune $(dune_version))
 (cram enable)
 (generate_opam_files true)
 
@@ -47,8 +45,26 @@ let dune_project ~dir ~name ({ author; username } : Config.t) : File.t =
   (qcheck-alcotest :with-test)
 ))
 |}]
+
+let dune_project ~dir ~name ({ author; username; dune_project; _ } : Config.t) : (File.t, Rresult.R.msg) Result.t =
+  let open Result.Let in
+  let+ content = match dune_project with
+    | None -> Ok (default_dune_project ~name ~author ~username)
+    | Some path ->
+      let open Bos in
+      let* content = Bos.OS.File.read Fpath.(v path) in
+      let+ pat = Pat.of_string content in
+      let defs = Astring.String.Map.(
+          empty
+          |> add "NAME" name
+          |> add "USERNAME" username
+          |> add "AUTHOR" author
+        )
+      in
+      Pat.format defs pat
   in
-  { path; content }
+  let path = Fpath.(dir / "dune-project") in
+  File.{ path; content }
 
 let gitignore ?(dir = Fpath.v ".") () : File.t =
   let path = Fpath.(dir / ".gitignore") in

@@ -14,14 +14,14 @@ let switch_is_initialized () =
 
 (* TODO add support for common opts *)
 (* TODO add logic to run updates on pindeps? *)
-let run _opts =
+let run (opts : Common.t) =
   Result.of_rresult
   @@
   let open Result.Let in
   let* switch_is_created = switch_is_initialized () in
   let* () = if not switch_is_created then
       let* () = Opam_cmd.create_switch () in
-      Opam_cmd.pin switch_plate_url
+      Opam_cmd.install_pkgs opts.config.dev_packages
     else
       Ok ()
   in

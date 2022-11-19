@@ -27,6 +27,7 @@ and other tooling in the ecosystem.
    kwdcmd
    ppx_string_interpolation
    sexplib
+   ppx_sexp_conv
   ; Tests
   (alcotest :with-test)
   (qcheck :with-test)
