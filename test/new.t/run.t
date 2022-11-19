@@ -5,18 +5,14 @@ Create an empty config to avoid searching into the runner environments file syst
 Initialize a new executable
 
   $ echo '((author "Shon Feder") (username shonfeder))' > config.sexp
-  $ nomad new --bin new_project --config config.sexp | grep "Done."
-  Done.
-  Done.
-  Done.
+  $ nomad new --bin new_project --config config.sexp | grep -o "Initiate project"
+  Initiate project
   $ ls -a new_project
   .
   ..
   .git
   .gitignore
   .ocamlformat
-  _build
-  _opam
   bin
   dune-project
   lib

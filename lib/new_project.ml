@@ -9,7 +9,7 @@ let switch_plate_url = "https://gitlab.com/shonfeder/switch-plate.git"
 
 (* Create an opam switch *)
 let run : Common.t -> config -> (unit, string) result =
- fun ({ config; _ } as opts) { name; kind } ->
+ fun { config; _ } { name; kind } ->
   Result.of_rresult
   @@
   let open Result.Let in
@@ -23,10 +23,5 @@ let run : Common.t -> config -> (unit, string) result =
   let* () = OS.Dir.set_current dir in
   let* () = Git_cmd.init () in
   let* () = Git_cmd.add [ "." ] in
-  let* () = Git_cmd.commit "Initiate project" in
-  let* () = Opam_cmd.create_switch () in
-  (* TODO This is a silly conversion :o *)
-  let* () = Sync.run opts |> Rresult.R.error_to_msg ~pp_error:Fmt.string in
-  (* TODO Make additional installs configurable *)
-  let+ () = Opam_cmd.pin switch_plate_url in
+  let+ () = Git_cmd.commit "Initiate project" in
   ()
