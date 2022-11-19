@@ -1,14 +1,15 @@
 Create an empty config to avoid searching into the runner environments file system
+
   $ mkdir .nomad && echo "()" > .nomad/config.sexp
 
-When no config file is specified, use the nearest config dir
+When no config values are specified, use the nearest config dir
 
   $ nomad config
   ((author "Author Name") (username github-username)
     (dev_packages
       (merlin>=4.6.1~5.0preview utop ocp-indent ocp-index odoc odig)))
 
-Can read data from the nearest config dir
+Can read config overrides from the nearest config dir
 
   $ echo '((author "Test Name") (username test-username))' > .nomad/config.sexp
   $ nomad config

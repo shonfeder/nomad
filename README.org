@@ -18,7 +18,7 @@ opam pin git@github.com:shonfeder/nomad.git
 If you project's name is =dingus=
 
 #+BEGIN_SRC sh
-nomad new --bin dingus
+nomad new dingus
 #+END_SRC
 
 And a scaffold for building the dingus executable will be created in the
@@ -45,6 +45,10 @@ nomad sync
 
 And the dependencies declared in your project's =dune-project= will be synced
 using opam.
+
+** Examples
+
+For more examples of usage, see [[file:test/README.org][test/README.org]].
 
 * Plans and ideas
 

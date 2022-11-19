@@ -1,0 +1,9 @@
+#+title: Examples
+
+Relatively exhaustive (annotated and tested) examples of nomad's usage are
+available in the blackbox tests:
+
+- [[file:new.t/run.t][Creating new projects]]
+- [[file:add.t/run.t][Adding components to a project]]
+- [[file:sync.t/run.t][Syncing a project's dependencies]]
+- [[file:config.t/][Inspecting and managing nomad's configuration]]
