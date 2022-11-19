@@ -49,4 +49,6 @@ Add an unmet library dependency
 We should be able to sync it, despite the initial dune build failing due to the missing
 library dependency
 
-  $ nomad sync
+  $ nomad sync | grep -o Done.
+  nomad: [WARNING] dune build failed with unfound library, nomad will now update dependecies
+  Done.
