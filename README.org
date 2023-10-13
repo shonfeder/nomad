@@ -2,7 +2,7 @@
 
 A tiny, minimally-functional project management tool for OCaml.
 
-*NOTE*: nomad is not published on opam and afaik I'm the only ures, so it is likely
+*NOTE*: nomad is not published on opam and afaik I'm the only user, so it is likely
 to be a bit brittle. Contributions to improve and harden the tool would be
 welcome.
 
