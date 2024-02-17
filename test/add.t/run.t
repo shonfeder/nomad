@@ -114,7 +114,8 @@ checking that we can load our custom config
   ((author "Author Name") (username github-username)
     (dune_project custom-dune-project.sexp)
     (dev_packages
-      (merlin>=4.6.1~5.0preview utop ocp-indent ocp-index odoc odig)))
+      (merlin>=4.6.1~5.0preview ocaml-lsp-server utop ocp-indent ocp-index odoc
+        odig)))
 
 Now add a new dune-project using that custom config
 

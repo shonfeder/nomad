@@ -11,6 +11,7 @@ let create_switch () =
       switch
       % "create"
       % "."
+      % "--working-dir"
       % "--deps-only"
       % "--with-test"
       % "--quiet"
@@ -25,6 +26,6 @@ let install_pkgs = function
 (* TODO Make "y optional?" *)
 let install_deps () =
   Cmd_util.run
-    Cmd.(install % "." % "--deps-only" % "--with-test")
+    Cmd.(install % "." % "--working-dir" % "--deps-only" % "--with-test")
 
 let pin url = Cmd_util.run Cmd.(bin % "pin" % "--yes" % url)

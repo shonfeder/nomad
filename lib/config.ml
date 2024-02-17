@@ -5,6 +5,7 @@ open Sexplib.Std
 
 let dev_dep_defaults =
   [ "merlin>=4.6.1~5.0preview" (*  OCaml 5 compat *)
+  ; "ocaml-lsp-server"
   ; "utop"
   ; "ocp-indent"
   ; "ocp-index"

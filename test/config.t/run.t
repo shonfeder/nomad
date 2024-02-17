@@ -7,7 +7,8 @@ When no config values are specified, use the nearest config dir
   $ nomad config
   ((author "Author Name") (username github-username)
     (dev_packages
-      (merlin>=4.6.1~5.0preview utop ocp-indent ocp-index odoc odig)))
+      (merlin>=4.6.1~5.0preview ocaml-lsp-server utop ocp-indent ocp-index odoc
+        odig)))
 
 Can read config overrides from the nearest config dir
 
@@ -15,7 +16,8 @@ Can read config overrides from the nearest config dir
   $ nomad config
   ((author "Test Name") (username test-username)
     (dev_packages
-      (merlin>=4.6.1~5.0preview utop ocp-indent ocp-index odoc odig)))
+      (merlin>=4.6.1~5.0preview ocaml-lsp-server utop ocp-indent ocp-index odoc
+        odig)))
 
 Can load explicitly set config
 
@@ -34,7 +36,8 @@ Default values are supplied when config has missing fields
   $ nomad config --config config.sexp
   ((author "Author Name") (username github-username)
     (dev_packages
-      (merlin>=4.6.1~5.0preview utop ocp-indent ocp-index odoc odig)))
+      (merlin>=4.6.1~5.0preview ocaml-lsp-server utop ocp-indent ocp-index odoc
+        odig)))
 
 When config file supplied by CLI is not found, report error
 
