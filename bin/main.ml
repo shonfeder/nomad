@@ -104,8 +104,8 @@ module New = struct
          Optional.(
            flag_choice
              ~default:Kind.Binary
-             [ c ~flags:["bin"] Kind.Binary ~doc:"create an executable binary"
-             ; c ~flags:["lib"] Kind.Library ~doc:"create a library"
+             [ choice ~flags:["bin"] Kind.Binary ~doc:"create an executable binary"
+             ; choice ~flags:["lib"] Kind.Library ~doc:"create a library"
              ])
        in
        let open Nomad.Result.Let in
