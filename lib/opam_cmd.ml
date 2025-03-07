@@ -14,6 +14,7 @@ let create_switch () =
       % "--working-dir"
       % "--deps-only"
       % "--with-test"
+      % "--with-dev-setup"
       % "--quiet"
       % "--yes")
 
